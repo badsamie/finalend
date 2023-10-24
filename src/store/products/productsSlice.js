@@ -27,7 +27,7 @@ const productSlice = createSlice({
       })
       .addCase(getProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload.data;
+        state.products = action.payload;
         state.totalPages = action.payload.totalPages;
       })
       .addCase(getProducts.rejected, (state) => {
