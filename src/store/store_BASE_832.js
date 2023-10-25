@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./products/productsSlice";
-import accountSlice from "./account/accountSlice";
 export default configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -8,6 +7,5 @@ export default configureStore({
     }),
   reducer: {
     products: productsReducer,
-    account: accountSlice,
   },
 });
