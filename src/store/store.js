@@ -1,9 +1,12 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
-export default configureStore({
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-  reducer: {},
+import { configureStore } from '@reduxjs/toolkit';
+import accountSlice from './account/accountSlice';
+
+const store = configureStore({
+  reducer: {
+   account : accountSlice
+  },
 });
+
+export default store;
+

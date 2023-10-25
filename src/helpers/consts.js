@@ -1,1 +1,1 @@
-export const PRODUCTS_API = "https://sss.samirkk.com/apartment/";
+export const ACCOUNT_API = "https://sss.samirkk.com/api/v1"
