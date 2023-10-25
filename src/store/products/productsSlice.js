@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts } from "./productsActions";
+import { getOneProduct, getProducts } from "./productsActions";
 
 const productSlice = createSlice({
   name: "products",
@@ -11,7 +11,7 @@ const productSlice = createSlice({
     totalPages: 1,
     currentCategory: "",
     search: "",
-    categories: [],
+    category: [],
     sortByRating: "",
     priceRange: "",
   },
@@ -31,6 +31,16 @@ const productSlice = createSlice({
         state.totalPages = action.payload.totalPages;
       })
       .addCase(getProducts.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(getOneProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getOneProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.oneProduct = action.payload;
+      })
+      .addCase(getOneProduct.rejected, (state) => {
         state.loading = false;
       });
   },

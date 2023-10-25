@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createProduct } from "../../store/products/productsActions";
+import {
+  createImage,
+  createProduct,
+} from "../../store/products/productsActions";
 
 const ProductCreate = () => {
   const [product, setProduct] = useState({
@@ -14,6 +17,8 @@ const ProductCreate = () => {
     count_views: 0,
     category: "",
   });
+  const [image, setImage] = useState(0);
+  console.log(image);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,13 +32,20 @@ const ProductCreate = () => {
       />
       <input
         type="text"
-        placeholder="Description"
+        placeholder="location"
         onChange={(e) => setProduct({ ...product, location: e.target.value })}
       />
       <input
         type="text"
         placeholder="education"
         onChange={(e) => setProduct({ ...product, education: e.target.value })}
+      />
+      <input
+        type="text"
+        placeholder="description"
+        onChange={(e) =>
+          setProduct({ ...product, description: e.target.value })
+        }
       />
       <input
         type="text"
@@ -62,10 +74,21 @@ const ProductCreate = () => {
           })
         }
       />
+      <input
+        type="file"
+        placeholder="image"
+        onChange={(e) =>
+          setImage({
+            ...image,
+            post: e.target.value,
+          })
+        }
+      />
 
       <button
         onClick={() => {
           dispatch(createProduct({ product }));
+          dispatch(createImage({ product }));
           navigate("/products");
         }}
       >

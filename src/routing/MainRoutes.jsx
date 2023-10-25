@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ProductsPage from "../pages/ProductsPage";
 import ProductCreatePage from "../pages/ProductCreatePage";
+import ProductDetailsPage from "../pages/ProductDetailsPage";
+import ProductEditPage from "../pages/ProductEditPage";
 
 const MainRoutes = () => {
   const ROUTES = [
@@ -14,6 +16,16 @@ const MainRoutes = () => {
       id: 2,
       path: "/product-create",
       element: <ProductCreatePage />,
+    },
+    {
+      id: 3,
+      path: "/details/:id",
+      element: <ProductDetailsPage />,
+    },
+    {
+      id: 3,
+      path: "/edit/:id",
+      element: <ProductEditPage />,
     },
   ];
   return (

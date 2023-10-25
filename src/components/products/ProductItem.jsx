@@ -5,10 +5,15 @@ const ProductItem = ({ product }) => {
   const navigate = useNavigate();
   return (
     <div>
-      <img src={product.picture} alt="Info" />
+      <h3
+        className="cursor-pointer w-24 "
+        onClick={() => navigate(`/details/${product.id}`)}
+      >
+        Title: {product.title}
+      </h3>
+      <p> Location:{product.location}</p>
       <p>${product.price}</p>
-      <h3>{product.name}</h3>
-      <p>{product.description}</p>
+      <img src={product.post} alt="" />
     </div>
   );
 };
