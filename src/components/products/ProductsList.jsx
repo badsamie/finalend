@@ -15,9 +15,11 @@ const ProductsList = () => {
       {loading ? (
         <h3>loading...</h3>
       ) : (
-        <div>
-          {products.map((product) => (
-            <ProductItem key={products.id} product={product} />
+        <div className="flex flex-wrap">
+          {products.map((products) => (
+            <>
+              <ProductItem key={products.id} product={products} />
+            </>
           ))}
         </div>
       )}

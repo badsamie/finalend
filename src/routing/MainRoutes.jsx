@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ProductsPage from "../pages/ProductsPage";
 import ProductCreatePage from "../pages/ProductCreatePage";
+
 import Register from "../components/account/Register";
 import Login from "../components/account/Login";
 
@@ -18,11 +19,20 @@ const MainRoutes = () => {
       element: <ProductCreatePage />,
     },
     {
-      id:3,
+      id: 3,
+      path: "/details/:id",
+      element: <ProductDetailsPage />,
+    },
+    {
+      id: 4,
+      path: "/edit/:id",
+      element: <ProductEditPage />,
+    },
+      id:5,
       path:"register",
       element:<Register/>
     }, {
-      id:4,
+      id:6,
       path:"login",
       element:<Login/>
     }
