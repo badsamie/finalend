@@ -22,7 +22,7 @@ export const loginAccount = createAsyncThunk(
       accountData.append('email', user.email);
       accountData.append('password', user.password);
       accountData.append('password2', user.password2);
-      const { data } = await axios.post(`${ACCOUNT_API}/account/login`, accountData);
+      const { data } = await axios.post(`${ACCOUNT_API}/account/login/`, accountData);
       return { data, navigate, user: user.email };
   }
 );
