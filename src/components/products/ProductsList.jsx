@@ -17,9 +17,7 @@ const ProductsList = () => {
       ) : (
         <div className="flex flex-wrap">
           {products.map((products) => (
-            <>
-              <ProductItem key={products.id} product={products} />
-            </>
+            <ProductItem key={products.id} product={products} />
           ))}
         </div>
       )}

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  createImage,
   createProduct,
+  getCategories,
 } from "../../store/products/productsActions";
 
 const ProductCreate = () => {
+  const { category } = useSelector((state) => state.products);
   const [product, setProduct] = useState({
     title: "",
     location: "",
@@ -17,10 +18,12 @@ const ProductCreate = () => {
     count_views: 0,
     category: "",
   });
-  const [image, setImage] = useState(0);
-  console.log(image);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   return (
     <div>
@@ -64,31 +67,19 @@ const ProductCreate = () => {
           })
         }
       />
-      <input
-        type="text"
-        placeholder="category"
-        onChange={(e) =>
-          setProduct({
-            ...product,
-            category: e.target.value,
-          })
-        }
-      />
-      <input
-        type="file"
-        placeholder="image"
-        onChange={(e) =>
-          setImage({
-            ...image,
-            post: e.target.value,
-          })
-        }
-      />
-
+      <select
+        onChange={(e) => setProduct({ ...product, category: e.target.value })}
+      >
+        <option>Choose category</option>
+        {category.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
       <button
         onClick={() => {
           dispatch(createProduct({ product }));
-          dispatch(createImage({ product }));
           navigate("/products");
         }}
       >

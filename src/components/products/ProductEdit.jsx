@@ -8,9 +8,7 @@ import {
 import { clearOneProductState } from "../../store/products/productsSlice";
 
 const ProductEdit = () => {
-  const { loading, oneProduct, categories } = useSelector(
-    (state) => state.products
-  );
+  const { loading, oneProduct } = useSelector((state) => state.products);
   const [product, setProduct] = useState(oneProduct);
   const { id } = useParams();
   const dispatch = useDispatch();
