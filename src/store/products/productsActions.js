@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { formToJSON } from "axios";
 import { PRODUCTS_API } from "../../helpers/consts";
 
 export const getProducts = createAsyncThunk(
@@ -37,6 +37,32 @@ export const createProduct = createAsyncThunk(
     }
   }
 );
+export const createImage = createAsyncThunk(
+  "products/createImage",
+  async ({ product }, { dispatch }) => {
+    try {
+      const imgData = new FormData();
+      imgData.append("post", product.id);
+      console.log(product.image);
+      imgData.append("image", product.image);
+      //
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          // Другие заголовки, если необходимо
+        },
+      };
+      await axios.post(
+        `${PRODUCTS_API}/api/v1/apartment/image/`,
+        imgData,
+        config
+      );
+      dispatch(getProducts());
+    } catch (error) {
+      console.log(error, "soska");
+    }
+  }
+);
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id }, { dispatch }) => {
@@ -54,6 +80,7 @@ export const editProduct = createAsyncThunk(
     dispatch(getProducts());
   }
 );
+
 export const getCategories = createAsyncThunk(
   "products/getCategories",
   async () => {
