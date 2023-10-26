@@ -12,6 +12,7 @@ const productSlice = createSlice({
     currentCategory: "",
     search: "",
     category: [],
+    image: [],
     sortByRating: "",
     priceRange: "",
   },

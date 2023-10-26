@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+  createImage,
   createProduct,
   getCategories,
 } from "../../store/products/productsActions";
@@ -52,14 +53,14 @@ const ProductCreate = () => {
       />
       <input
         type="text"
-        placeholder="price_dollar"
+        placeholder="price_dollar (only num)"
         onChange={(e) =>
           setProduct({ ...product, price_dollar: e.target.value })
         }
       />
       <input
         type="text"
-        placeholder="price"
+        placeholder="price (only num)"
         onChange={(e) =>
           setProduct({
             ...product,
@@ -80,6 +81,7 @@ const ProductCreate = () => {
       <button
         onClick={() => {
           dispatch(createProduct({ product }));
+          dispatch(createImage({ product }));
           navigate("/products");
         }}
       >
