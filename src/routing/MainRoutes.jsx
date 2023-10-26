@@ -6,6 +6,7 @@ import Register from "../components/account/Register";
 import Login from "../components/account/Login";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 import ProductEditPage from "../pages/ProductEditPage";
+import Cart from "../components/cart/Cart";
 
 const MainRoutes = () => {
   const ROUTES = [
@@ -38,6 +39,11 @@ const MainRoutes = () => {
       id: 6,
       path: "/login",
       element: <Login />,
+    },
+    {
+      id: 7,
+      path: "/cart",
+      element: <Cart />,
     },
   ];
   return (
