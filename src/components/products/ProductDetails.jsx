@@ -12,12 +12,10 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const { loading, oneProduct } = useSelector((state) => state.products);
   const { id } = useParams();
-
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
   }, []);
-
   return (
     <>
       {loading ? (
@@ -26,7 +24,6 @@ const ProductDetails = () => {
         <>
           {oneProduct && (
             <div>
-              <img src={oneProduct.post} alt="image" />
               <h3>Title:{oneProduct.title}</h3>
               <p>Location:{oneProduct.location}</p>
               <p>Price:{oneProduct.price}</p>

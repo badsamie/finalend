@@ -37,19 +37,6 @@ export const createProduct = createAsyncThunk(
     }
   }
 );
-export const createImage = createAsyncThunk(
-  "products/createImage",
-  async ({ product }, { dispatch }) => {
-    try {
-      const imageData = new FormData();
-      imageData.append("post", product.post);
-      await axios.post(`${PRODUCTS_API}/api/v1/apartment/image/`, imageData);
-      dispatch(getProducts());
-    } catch (err) {
-      console.log(err);
-    }
-  }
-);
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id }, { dispatch }) => {
@@ -65,5 +52,17 @@ export const editProduct = createAsyncThunk(
       product
     );
     dispatch(getProducts());
+  }
+);
+export const getCategories = createAsyncThunk(
+  "products/getCategories",
+  async () => {
+    const data = await axios.get(`${PRODUCTS_API}/api/v1/apartment/category/`);
+    const uniqCategories = new Set(data.data.map((product) => product.name));
+    const category = [];
+    for (let i of uniqCategories) {
+      category.push(i);
+    }
+    return category;
   }
 );

@@ -13,7 +13,6 @@ const ProductItem = ({ product }) => {
       </h3>
       <p> Location:{product.location}</p>
       <p>${product.price}</p>
-      <img src={product.post} alt="" />
     </div>
   );
 };
