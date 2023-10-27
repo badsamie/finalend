@@ -17,7 +17,6 @@ const ProductDetails = () => {
   const { loading, oneProduct, rating } = useSelector(
     (state) => state.products
   );
-  console.log(oneProduct);
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
 
@@ -45,7 +44,6 @@ const ProductDetails = () => {
     dispatch(removeFromCart(oneProduct.id));
     navigate("/products");
   };
-  }, []);
 
   return (
     <>
