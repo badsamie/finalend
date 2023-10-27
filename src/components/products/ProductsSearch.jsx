@@ -6,19 +6,38 @@ import { getProducts } from "../../store/products/productsActions";
 import { setSearchVal } from "../../store/products/productsSlice";
 const ProductsSearch = () => {
   const { search } = useSelector((state) => state.products);
-  const [searchValue, setSearhValue] = useState("");
+  const [searchValue, setSearhValue] = useState(search);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!search) {
-      setSearhValue("");
+      setSearhValue(search);
     }
   }, [search]);
+
+  const live = (func, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+  const liveSearch = live((value) => {
+    dispatch(setSearchVal({ search: value }));
+    dispatch(getProducts());
+  }, 300);
+
+  const changeSearch = (value) => {
+    setSearhValue(value);
+    liveSearch(value);
+  };
 
   return (
     <>
       <input
-        onChange={(e) => setSearhValue(e.target.value)}
+        onChange={(e) => changeSearch(e.target.value)}
         type="text"
         value={searchValue}
         id="Search"
