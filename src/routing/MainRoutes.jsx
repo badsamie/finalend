@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Chat from "../components/chat/Chat";
 import ProductsPage from "../pages/ProductsPage";
 import ProductCreatePage from "../pages/ProductCreatePage";
 import Register from "../components/account/Register";
@@ -10,6 +11,10 @@ import ProductEditPage from "../pages/ProductEditPage";
 const MainRoutes = () => {
   const ROUTES = [
     {
+      id: 7,
+      path: "/chat",
+      element: <Chat />,
+    },
       id: 1,
       path: "/products",
       element: <ProductsPage />,
