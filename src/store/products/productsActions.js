@@ -1,14 +1,38 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios, { formToJSON } from "axios";
+import axios from "axios";
 import { PRODUCTS_API } from "../../helpers/consts";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async () => {
-    const { data } = await axios.get(`${PRODUCTS_API}/api/v1/apartment/`);
+  async (_, { getState }) => {
+    const { currentPage, currentCategory, search, sortByRating, priceRange } =
+      getState().products;
+    const pagePag = `?page=${currentPage}`;
+    const searchP = `?search=${search}`;
+    const { data } = await axios.get(
+      `${PRODUCTS_API}/api/v1/apartment/${pagePag}&${searchP}`
+    );
     return data.results;
   }
 );
+
+export const getTotalPages = createAsyncThunk(
+  "products/getTotalPages",
+  async () => {
+    let products = null;
+    let totalPages = 1;
+    do {
+      let { data } = await axios.get(
+        `${PRODUCTS_API}/api/v1/apartment/?page=${totalPages}`
+      );
+      products = data.result;
+      totalPages++;
+    } while (products);
+
+    return totalPages;
+  }
+);
+
 export const getOneProduct = createAsyncThunk(
   "products/getOneProduct",
   async ({ id }) => {
@@ -18,8 +42,7 @@ export const getOneProduct = createAsyncThunk(
 );
 export const createProduct = createAsyncThunk(
   "products/createProduct",
-
-  async ({ product }, { dispatch }) => {
+  async ({ product }) => {
     try {
       const productData = new FormData();
       productData.append("title", product.title);
@@ -31,7 +54,6 @@ export const createProduct = createAsyncThunk(
       productData.append("category", product.category);
       productData.append("count_views", product.count_views);
       await axios.post(`${PRODUCTS_API}/api/v1/apartment/`, productData);
-      dispatch(getProducts());
     } catch (err) {
       console.log(err);
     }
@@ -49,7 +71,6 @@ export const createImage = createAsyncThunk(
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          // Другие заголовки, если необходимо
         },
       };
       await axios.post(
