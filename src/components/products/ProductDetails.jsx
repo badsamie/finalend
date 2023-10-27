@@ -6,21 +6,38 @@ import {
   getOneProduct,
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
-import { addToCartAsync } from "../../store/cart/cartActions";
+import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, oneProduct } = useSelector((state) => state.products);
   const { id } = useParams();
-  // console.log(oneProduct);
+  const cartItems = useSelector((state) => state.cart.items) || [];
+
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
-  }, []);
+  }, [dispatch, id]);
 
-  const handleAddToCart = () => {
-    dispatch(addToCartAsync(oneProduct.id));
+  if (!oneProduct) {
+    return <p>Loading...</p>;
+  }
+
+  const isItemInCart = cartItems.some((item) => item.id === oneProduct.id);
+
+  const handleCartAction = () => {
+    if (isItemInCart) {
+      dispatch(removeFromCart(oneProduct.id));
+    } else {
+      dispatch(toggleCart(oneProduct));
+    }
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteProduct({ id: oneProduct.id }));
+    dispatch(removeFromCart(oneProduct.id));
+    navigate("/products");
   };
 
   return (
@@ -31,8 +48,14 @@ const ProductDetails = () => {
         <>
           {oneProduct && (
             <div>
-              <img src={oneProduct.post} alt="image" />
               <h3>Title:{oneProduct.title}</h3>
+              {oneProduct.images.length && (
+                <img
+                  className="w-36 h-56"
+                  src={oneProduct.images[0].image}
+                  alt=""
+                />
+              )}
               <p>Location:{oneProduct.location}</p>
               <p>Price:{oneProduct.price}</p>
               <p>$:{oneProduct.price_dollar}</p>
@@ -40,6 +63,7 @@ const ProductDetails = () => {
               <p>Desc:{oneProduct.description}</p>
               <p>count_views:{oneProduct.count_views}</p>
               <p>Category:{oneProduct.category}</p>
+              <p>{oneProduct.updated_at}</p>
               <button
                 onClick={() => navigate(`/edit/${oneProduct.id}`)}
                 className="bg-blue-600"
@@ -47,18 +71,14 @@ const ProductDetails = () => {
                 edit
               </button>
               <span>--</span>
-              <button
-                className="bg-red-700"
-                onClick={() => {
-                  dispatch(deleteProduct({ id: oneProduct.id }));
-                  navigate("/products");
-                }}
-              >
-                delete
+
+              <button className="bg-red-700" onClick={handleDelete}>
+                Delete
               </button>
               <span>--------</span>
-              <button className="bg-red-700" onClick={handleAddToCart}>
-                add to cart
+
+              <button className="bg-red-700" onClick={handleCartAction}>
+                {isItemInCart ? "Remove from Cart" : "Add to Cart"}
               </button>
             </div>
           )}

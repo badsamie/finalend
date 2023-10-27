@@ -9,7 +9,7 @@ export const addDataToLocalStorage = (user, tokens) => {
 };
 
 export const updateToken = () => {
-  updateFunc = setInterval(async () => {
+  let updateFunc = setInterval(async () => {
     const tokens = JSON.parse(localStorage.getItem("tokens"));
     if (!tokens) return clearInterval(updateFunc);
     const Authorization = `Bearer ${tokens.access}`;
@@ -22,24 +22,18 @@ export const updateToken = () => {
       "tokens",
       JSON.stringify({ refresh: tokens.refresh, access: data.access })
     );
-  }, 1000 * 60 * 1);
-  // Добавьте этот перехватчик там, где настраиваете Axios
-  axios.interceptors.request.use(
-    (config) => {
-      const tokens = JSON.parse(localStorage.getItem("tokens"));
-      if (tokens) {
-        config.headers.Authorization = `Bearer ${tokens.access}`;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  }, 1000 * 60 * 9);
 };
 
 export const logout = () => {
-  clearInterval(updateFunc); // Очистка интервала при выходе
   localStorage.removeItem("user");
   localStorage.removeItem("tokens");
+};
+
+export const getProductRating = (productObj) => {
+  const rating =
+    productObj.comments.reduce((acc, commentObj) => {
+      return acc + commentObj.rating;
+    }, 0) / productObj.comments.length;
+  return rating.toFixed(1);
 };

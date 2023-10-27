@@ -1,32 +1,43 @@
-// import { createSlice } from "@reduxjs/toolkit";
-
-// const cartSlice = createSlice({
-//   name: "cart",
-//   initialState: JSON.parse(localStorage.getItem("cart")) || [],
-//   reducers: {
-//     addToCart: (state, action) => {
-//       state.push(action.payload);
-//       localStorage.setItem("cart", JSON.stringify(state));
-//     },
-//   },
-// });
-
-// export const { addToCart } = cartSlice.actions;
-// export default cartSlice.reducer;
-
-// cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
-const cartSlice = createSlice({
+const loadCartFromStorage = () => {
+  const cartData = localStorage.getItem("cart");
+  return cartData ? JSON.parse(cartData) : { items: [] };
+};
+
+export const cartSlice = createSlice({
   name: "cart",
-  initialState: JSON.parse(localStorage.getItem("cart")) || [], // Use localStorage for initialization
+  initialState: loadCartFromStorage(),
   reducers: {
-    addToCart: (state, action) => {
-      state.push(action.payload);
-      localStorage.setItem("cart", JSON.stringify(state)); // Save to localStorage after each change
+    toggleCart: (state, action) => {
+      const itemId = action.payload?.id;
+
+      if (itemId) {
+        const existingItem = state.items?.find((item) => item.id === itemId);
+
+        if (existingItem) {
+          state.items = state.items.filter((item) => item.id !== itemId);
+        } else {
+          state.items = state.items || [];
+          state.items.push({ ...action.payload, quantity: 1 });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
+    },
+    removeAllFromCart: (state, action) => {
+      state.items = [];
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
+    removeFromCart: (state, action) => {
+      const itemId = action.payload;
+      state.items = state.items.filter((item) => item.id !== itemId);
+      localStorage.setItem("cart", JSON.stringify(state));
     },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { toggleCart, removeAllFromCart, removeFromCart } =
+  cartSlice.actions;
+
 export default cartSlice.reducer;

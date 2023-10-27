@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  createImage,
   editProduct,
+  getCategories,
   getOneProduct,
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
 
 const ProductEdit = () => {
-  const { loading, oneProduct, categories } = useSelector(
+  const { loading, oneProduct, category } = useSelector(
     (state) => state.products
   );
   const [product, setProduct] = useState(oneProduct);
@@ -17,6 +19,7 @@ const ProductEdit = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(getCategories());
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
   }, []);
@@ -80,18 +83,31 @@ const ProductEdit = () => {
                 }
                 value={product.description}
               />
-              <input
-                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
-                type="text"
-                placeholder="Name"
+              <select
                 onChange={(e) =>
                   setProduct({ ...product, category: e.target.value })
                 }
-                value={product.category}
+              >
+                <option>Choose category</option>
+                {category.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <input
+                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
+                type="file"
+                onChange={(e) => {
+                  const selectedFile = e.target.files[0];
+                  setProduct({ ...product, image: selectedFile });
+                }}
               />
+
               <button
                 onClick={() => {
                   dispatch(editProduct({ product }));
+                  dispatch(createImage({ product }));
                   navigate("/products");
                 }}
               >
