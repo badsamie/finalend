@@ -5,16 +5,37 @@ import { PRODUCTS_API } from "../../helpers/consts";
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, { getState }) => {
-    const { currentPage, currentCategory, search, sortByRating, priceRange } =
-      getState().products;
-    const pagePag = `?page=${currentPage}`;
-    const searchP = `?search=${search}`;
+    const { currentPage, search } = getState().products;
+    const queryParams = [];
+    if (currentPage) {
+      queryParams.push(`page=${currentPage}`);
+    }
+    if (search) {
+      queryParams.push(`search=${search}`);
+    }
+
+    const queryString =
+      queryParams.length > 0 ? `?${queryParams.join("&")}` : "";
+
     const { data } = await axios.get(
-      `${PRODUCTS_API}/api/v1/apartment/${pagePag}&${searchP}`
+      `${PRODUCTS_API}/api/v1/apartment${queryString}`
     );
     return data.results;
   }
 );
+
+// export const getProducts = createAsyncThunk(
+//   "products/getProducts",
+//   async (_, { getState }) => {
+//     const { currentPage, search } = getState().products;
+//     const pagePag = `?page=${currentPage}`;
+//     const searchP = `?search=${search}`;
+//     const { data } = await axios.get(
+//       `${PRODUCTS_API}/api/v1/apartment/${pagePag}${searchP}`
+//     );
+//     return data.results;
+//   }
+// );
 
 export const getTotalPages = createAsyncThunk(
   "products/getTotalPages",
@@ -42,7 +63,7 @@ export const getOneProduct = createAsyncThunk(
 );
 export const createProduct = createAsyncThunk(
   "products/createProduct",
-  async ({ product }) => {
+  async ({ product }, { dispatch }) => {
     try {
       const productData = new FormData();
       productData.append("title", product.title);
@@ -54,6 +75,7 @@ export const createProduct = createAsyncThunk(
       productData.append("category", product.category);
       productData.append("count_views", product.count_views);
       await axios.post(`${PRODUCTS_API}/api/v1/apartment/`, productData);
+      dispatch(getProducts());
     } catch (err) {
       console.log(err);
     }

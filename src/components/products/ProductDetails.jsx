@@ -11,7 +11,6 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, oneProduct } = useSelector((state) => state.products);
-  console.log(oneProduct);
   const { id } = useParams();
   useEffect(() => {
     dispatch(getOneProduct({ id }));
