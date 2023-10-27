@@ -1,8 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Chat from "../components/chat/Chat";
 
 const MainRoutes = () => {
-  const ROUTES = [{}];
+  const ROUTES = [
+    {
+      id: 15,
+      path: "/chat",
+      element: <Chat />,
+    },
+  ];
   return (
     <Routes>
       {ROUTES.map((route) => (
