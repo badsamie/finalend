@@ -15,10 +15,12 @@ const MainRoutes = () => {
       path: "/chat",
       element: <Chat />,
     },
+    {
       id: 1,
       path: "/products",
       element: <ProductsPage />,
     },
+
     {
       id: 2,
       path: "/product-create",
