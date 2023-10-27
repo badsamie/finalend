@@ -9,7 +9,7 @@ export const registerAccount = createAsyncThunk(
       userData.append("email", user.email)
       userData.append("password", user.password)
       userData.append("password2", user.password2)
-      const res = await axios.post(`${ACCOUNT_API}/account/register/`, userData)
+      const res = await axios.post(`${ACCOUNT_API}/api/v1/account/register/`, userData)
         console.log(res);
         return {navigate}
   }
@@ -21,8 +21,8 @@ export const loginAccount = createAsyncThunk(
       const accountData = new FormData();
       accountData.append('email', user.email);
       accountData.append('password', user.password);
-      accountData.append('password2', user.password2);
-      const { data } = await axios.post(`${ACCOUNT_API}/account/login/`, accountData);
+      // accountData.append('password2', user.password2);
+      const { data } = await axios.post(`${ACCOUNT_API}/api/v1/account/login/`, accountData);
       return { data, navigate, user: user.email };
   }
 );

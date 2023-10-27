@@ -5,6 +5,7 @@ import { registerAccount } from "../../store/account/accountActions";
 import { clearStatusState } from "../../store/account/accountSlice";
 import { logout } from "../../helpers/functions";
 
+
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,31 +36,31 @@ const Register = () => {
             </div>
           ) : (
             <>
-              <h1>register</h1>
+              <h1 className="polyglot">Зарегистрируйтесь чтобы работать с Polyglot</h1>
               <input
                 type="email"
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
-                placeholder="pdkpdk"
+                placeholder="Почта"
               />
               <input
                 type="password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
-                placeholder="pdkpdk"
+                placeholder="Пароль"
               />
               <input
                 type="password"
                 onChange={(e) =>
                   setUser({ ...user, password2: e.target.value })
                 }
-                placeholder="pdkpdk"
+                placeholder="Потвердить пароль"
               />
-              <button
+              <button className="register"
                 onClick={() => dispatch(registerAccount({ user, navigate }))}
               >
-                click
+                Зарегистрироваться!
               </button>
               <span>--</span>
-              <button onClick={logout}>logout</button>
+               <button onClick={logout}>logout</button>
             </>
           )}
         </>

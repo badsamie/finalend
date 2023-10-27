@@ -32,6 +32,10 @@ const Navbar = () => {
       >
         Products Page
       </h4>
+      {/* <h4 className="cursor-pointer bg-slate-500"
+      onClick={() => navigate("/register")}>
+        Polyglot
+      </h4> */}
     </div>
   );
 };

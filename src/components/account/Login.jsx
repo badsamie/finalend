@@ -8,7 +8,7 @@ const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    password2: "",
+    // password2: "",
   });
 
   const { loading, status } = useSelector((state) => state.account);
@@ -48,14 +48,14 @@ const Login = () => {
                 placeholder="Password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
-               <input
+               {/* <input
               type="password"
               placeholder="Password2"
               onChange={(e) => setUser({ ...user, password2: e.target.value })}
-            />
-              <button onClick={() => dispatch(loginAccount({ user, navigate }))}>
-                Login
-              </button>
+            /> */}
+              <button onClick={() => dispatch(loginAccount({ user: { email: user.email, password: user.password }, navigate }))}>
+                  Login
+                </button>
             </div>
           )}
         </>
