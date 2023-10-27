@@ -38,7 +38,7 @@ const accountSlice = createSlice({
         state.user = action.payload.user;
         addDataToLocalStorage(action.payload.user, action.payload.data);
         updateToken();
-        action.payload.navigate("/");
+        action.payload.navigate("/products");
       })
       .addCase(loginAccount.rejected, (state) => {
         state.loading = false;

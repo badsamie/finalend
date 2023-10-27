@@ -6,17 +6,22 @@ import {
   getOneProduct,
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
+import { addToCartAsync } from "../../store/cart/cartActions";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, oneProduct } = useSelector((state) => state.products);
   const { id } = useParams();
-
+  // console.log(oneProduct);
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
   }, []);
+
+  const handleAddToCart = () => {
+    dispatch(addToCartAsync(oneProduct.id));
+  };
 
   return (
     <>
@@ -50,6 +55,10 @@ const ProductDetails = () => {
                 }}
               >
                 delete
+              </button>
+              <span>--------</span>
+              <button className="bg-red-700" onClick={handleAddToCart}>
+                add to cart
               </button>
             </div>
           )}

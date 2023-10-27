@@ -10,7 +10,7 @@ export const registerAccount = createAsyncThunk(
     userData.append("password", user.password);
     userData.append("password2", user.password2);
     const res = await axios.post(`${ACCOUNT_API}/account/register/`, userData);
-    console.log(res);
+    // console.log(res);
     return { navigate };
   }
 );
@@ -26,6 +26,7 @@ export const loginAccount = createAsyncThunk(
       `${ACCOUNT_API}/account/login/`,
       accountData
     );
+    navigate("/products");
     return { data, navigate, user: user.email };
   }
 );

@@ -18,7 +18,7 @@ const ProductCreate = () => {
     category: "",
   });
   const [image, setImage] = useState(0);
-  console.log(image);
+  // console.log(image);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

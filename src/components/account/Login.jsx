@@ -47,8 +47,6 @@ const Login = () => {
               />
               <button
                 onClick={() => dispatch(loginAccount({ user, navigate }))}
-
-                // onClick={() => dispatch(loginAccount({ user, navigate }))}
               >
                 Login
               </button>
