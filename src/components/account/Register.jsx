@@ -17,7 +17,7 @@ const Register = () => {
   });
 
   useEffect(() => {
-    dispatch(clearStatusState);
+    dispatch(clearStatusState());
   }, []);
 
   return (
@@ -39,27 +39,27 @@ const Register = () => {
               <input
                 type="email"
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
-                placeholder="pdkpdk"
+                placeholder="Email"
               />
               <input
                 type="password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
-                placeholder="pdkpdk"
+                placeholder="Password"
               />
               <input
                 type="password"
                 onChange={(e) =>
                   setUser({ ...user, password2: e.target.value })
                 }
-                placeholder="pdkpdk"
+                placeholder="Confirm Password"
               />
               <button
                 onClick={() => dispatch(registerAccount({ user, navigate }))}
               >
-                click
+                Register
               </button>
               <span>--</span>
-              <button onClick={logout}>logout</button>
+              <button onClick={logout}>Logout</button>
             </>
           )}
         </>

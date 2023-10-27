@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PRODUCTS_API } from "../../helpers/consts";
+import { toggleCart } from "../cart/cartSlice";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
@@ -105,13 +106,23 @@ export const createImage = createAsyncThunk(
     }
   }
 );
+// export const deleteProduct = createAsyncThunk(
+//   "products/deleteProduct",
+//   async ({ id }, { dispatch }) => {
+//     await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`);
+//     dispatch(getProducts());
+//   }
+// );
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async ({ id }, { dispatch }) => {
-    await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`);
-    dispatch(getProducts());
+  async ({ id, oneProduct }, { dispatch }) => {
+    await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`).then(() => {
+      dispatch(toggleCart(oneProduct));
+      dispatch(getProducts());
+    });
   }
 );
+
 export const editProduct = createAsyncThunk(
   "products/editProduct",
   async ({ product }, { dispatch }) => {

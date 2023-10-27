@@ -1,6 +1,8 @@
 import axios from "axios";
 import { ACCOUNT_API } from "./consts";
 
+let updateFunc; // Declare updateFunc outside the function
+
 export const addDataToLocalStorage = (user, tokens) => {
   localStorage.setItem("user", JSON.stringify(user));
   localStorage.setItem("tokens", JSON.stringify(tokens));
