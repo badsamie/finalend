@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  createImage,
   createProduct,
   getCategories,
 } from "../../store/products/productsActions";
@@ -81,7 +80,6 @@ const ProductCreate = () => {
       <button
         onClick={() => {
           dispatch(createProduct({ product }));
-          dispatch(createImage({ product }));
           navigate("/products");
         }}
       >

@@ -2,17 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProductItem = ({ product }) => {
-  console.log(product);
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="ml-1 rounded-xl border-blue-400 border w-24">
       <h3
-        className="cursor-pointer w-24 "
+        className="cursor-pointer"
         onClick={() => navigate(`/details/${product.id}`)}
       >
-        Title: {product.title}
+        {product.title}
       </h3>
-      <p> Location:{product.location}</p>
+      <p>{product.location}</p>
       <p>${product.price}</p>
     </div>
   );
