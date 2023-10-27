@@ -5,7 +5,7 @@ import { PRODUCTS_API } from "../../helpers/consts";
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, { getState }) => {
-    const { currentPage, search } = getState().products;
+    const { currentPage, search, ratingAdd } = getState().products;
     const queryParams = [];
     if (currentPage) {
       queryParams.push(`page=${currentPage}`);
@@ -13,7 +13,9 @@ export const getProducts = createAsyncThunk(
     if (search) {
       queryParams.push(`search=${search}`);
     }
-
+    if (ratingAdd) {
+      queryParams.push(`/rating/`);
+    }
     const queryString =
       queryParams.length > 0 ? `?${queryParams.join("&")}` : "";
 
@@ -23,20 +25,6 @@ export const getProducts = createAsyncThunk(
     return data.results;
   }
 );
-
-// export const getProducts = createAsyncThunk(
-//   "products/getProducts",
-//   async (_, { getState }) => {
-//     const { currentPage, search } = getState().products;
-//     const pagePag = `?page=${currentPage}`;
-//     const searchP = `?search=${search}`;
-//     const { data } = await axios.get(
-//       `${PRODUCTS_API}/api/v1/apartment/${pagePag}${searchP}`
-//     );
-//     return data.results;
-//   }
-// );
-
 export const getTotalPages = createAsyncThunk(
   "products/getTotalPages",
   async () => {
@@ -53,7 +41,6 @@ export const getTotalPages = createAsyncThunk(
     return totalPages;
   }
 );
-
 export const getOneProduct = createAsyncThunk(
   "products/getOneProduct",
   async ({ id }) => {
@@ -63,7 +50,7 @@ export const getOneProduct = createAsyncThunk(
 );
 export const createProduct = createAsyncThunk(
   "products/createProduct",
-  async ({ product }, { dispatch }) => {
+  async ({ product }) => {
     try {
       const productData = new FormData();
       productData.append("title", product.title);
@@ -75,12 +62,24 @@ export const createProduct = createAsyncThunk(
       productData.append("category", product.category);
       productData.append("count_views", product.count_views);
       await axios.post(`${PRODUCTS_API}/api/v1/apartment/`, productData);
-      dispatch(getProducts());
     } catch (err) {
       console.log(err);
     }
   }
 );
+export const addRating = createAsyncThunk(
+  "products/addRating",
+  async ({ product }) => {
+    try {
+      const ratingData = new FormData();
+      ratingData.append("rating", product.rating);
+      await axios.post(`${PRODUCTS_API}/api/v1/apartment/rating/`, ratingData);
+    } catch (err) {
+      console.log(err, "не добавляет");
+    }
+  }
+);
+
 export const createImage = createAsyncThunk(
   "products/createImage",
   async ({ product }, { dispatch }) => {
@@ -123,7 +122,6 @@ export const editProduct = createAsyncThunk(
     dispatch(getProducts());
   }
 );
-
 export const getCategories = createAsyncThunk(
   "products/getCategories",
   async () => {

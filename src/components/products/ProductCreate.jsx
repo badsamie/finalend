@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   createProduct,
   getCategories,
+  getProducts,
 } from "../../store/products/productsActions";
 
 const ProductCreate = () => {
