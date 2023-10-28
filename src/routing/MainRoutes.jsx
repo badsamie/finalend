@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Quiz from "../components/quiz/Quiz";
 import Chat from "../components/chat/Chat";
 import ProductsPage from "../pages/ProductsPage";
 import ProductCreatePage from "../pages/ProductCreatePage";
@@ -9,13 +10,10 @@ import ProductDetailsPage from "../pages/ProductDetailsPage";
 import ProductEditPage from "../pages/ProductEditPage";
 import Cart from "../components/cart/Cart";
 
+
 const MainRoutes = () => {
   const ROUTES = [
-    {
-      id: 7,
-      path: "/chat",
-      element: <Chat />,
-    },
+ 
     {
       id: 1,
       path: "/products",
@@ -52,7 +50,18 @@ const MainRoutes = () => {
       path: "/cart",
       element: <Cart />,
     },
+    {
+    id: 8,
+    path: "/quiz",
+    element: <Quiz/>
+  },
+      {
+      id: 9,
+      path: "/chat",
+      element: <Chat />,
+    },
   ];
+
   return (
     <Routes>
       {ROUTES.map((route) => (
