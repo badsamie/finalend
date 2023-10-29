@@ -21,50 +21,54 @@ const Register = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center h-screen">
       {loading ? (
-        <div>loading</div>
+        <div>Loading...</div>
       ) : (
         <>
           {status ? (
             <div>
               <h3>An error occurred!</h3>
-              <button onClick={() => dispatch(clearStatusState())}>
+              <button onClick={() => dispatch(clearStatusState())} className="bg-purple-500 text-white px-4 py-2 rounded-full mt-2">
                 Try again!
               </button>
             </div>
           ) : (
             <>
-              <h1>register</h1>
-              <input
-                type="email"
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
-                placeholder="Email"
-              />
-              <input
-                type="password"
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
-                placeholder="Password"
-              />
-              <input
-                type="password"
-                onChange={(e) =>
-                  setUser({ ...user, password2: e.target.value })
-                }
-                placeholder="Confirm Password"
-              />
-              <button
-                onClick={() => dispatch(registerAccount({ user, navigate }))}
-              >
-                Register
-              </button>
+              <div className="text-center">
+              <h1 className="text-3xl font-bold mb-4 text-purple-500">Отлично!</h1>
+              <h3 className="text-xl text-purple-500">Теперь введите свою почту</h3>
+
+                <input
+                  type="email"
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  placeholder="Email"
+                  className="border p-2 mb-4"
+                />
+                <input
+                  type="password"
+                  onChange={(e) => setUser({ ...user, password: e.target.value })}
+                  placeholder="Password"
+                  className="border p-2 mb-4"
+                />
+                <input
+                  type="password"
+                  onChange={(e) => setUser({ ...user, password2: e.target.value })}
+                  placeholder="Confirm Password"
+                  className="border p-2 mb-4"
+                />
+                <button onClick={() => dispatch(registerAccount({ user, navigate }))} className="bg-purple-500 text-white text-2xl font-bold my-4 rounded-full py-2 px-4 w-80">
+                  Register
+                </button>
+              </div>
+
               <span>--</span>
-              <button onClick={logout}>Logout</button>
+              <button className="text-purple-500"  onClick={logout}>Logout</button>
             </>
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

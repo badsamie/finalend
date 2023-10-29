@@ -14,9 +14,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [reting, setReting] = useState();
-  const { loading, oneProduct, rating } = useSelector(
-    (state) => state.products
-  );
+  const { loading, oneProduct, rating } = useSelector((state) => state.products);
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
 
@@ -52,55 +50,59 @@ const ProductDetails = () => {
       ) : (
         <>
           {oneProduct && (
-            <div>
-              <h3>Title:{oneProduct.title}</h3>
-              {oneProduct.images.length && (
+            <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
+              <h3 className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
+                Title: {oneProduct.title}
+              </h3>
+              {oneProduct.images.length > 0 && (
                 <img
                   className="w-36 h-56"
                   src={oneProduct.images[0].image}
                   alt=""
                 />
               )}
-              <p>Location:{oneProduct.location}</p>
-              <p>Price:{oneProduct.price}</p>
-              <p>$:{oneProduct.price_dollar}</p>
-              <p>Education:{oneProduct.education}</p>
-              <p>Desc:{oneProduct.description}</p>
-              <p>count_views:{oneProduct.count_views}</p>
-              <p>Category:{oneProduct.category}</p>
-              <p>{oneProduct.updated_at}</p>
-              <p>rating:{oneProduct.rating}</p>
-              <input
-                type="number"
-                onChange={(e) => setReting(e.target.value)}
-              />
-
-              <button
-                onClick={() => {
-                  dispatch(addRating({ product: { rating: reting } }));
-                  dispatch(getProducts());
-                  setReting("");
-                }}
-              >
-                send
-              </button>
-
-              <button
-                onClick={() => navigate(`/edit/${oneProduct.id}`)}
-                className="bg-blue-600"
-              >
-                edit
-              </button>
-              <span>--</span>
-
-              <button className="bg-red-700" onClick={handleDelete}>
-                Delete
-              </button>
-              <span>--------</span>
-
-              <button className="bg-red-700" onClick={handleCartAction}>
-                {isItemInCart ? "Remove from Cart" : "Add to Cart"}
-              </button>
+              <div className="text-gray-600">
+                <p>Location: {oneProduct.location}</p>
+                <p>Price: {oneProduct.price}</p>
+                <p className="inline-block rounded bg-purple-500 px-12 py-3 text-sm font-medium text-white transition bg-indigo-700">
+                  $: {oneProduct.price_dollar}
+                </p>
+                <p>Education: {oneProduct.education}</p>
+              </div>
+              <div className="mt-4 text-gray-600">
+                <p>Desc: {oneProduct.description}</p>
+                <p>count_views: {oneProduct.count_views}</p>
+                <p>Category: {oneProduct.category}</p>
+                <p>{oneProduct.updated_at}</p>
+                <p>Rating: {oneProduct.rating}</p>
+                <input
+                  type="number"
+                  onChange={(e) => setReting(e.target.value)}
+                />
+              </div>
+              <div className="mt-4">
+                <button
+                  onClick={() => {
+                    dispatch(addRating({ product: { rating: reting } }));
+                    dispatch(getProducts());
+                    setReting("");
+                  }}
+                >
+                  Send
+                </button>
+                <button
+                  onClick={() => navigate(`/edit/${oneProduct.id}`)}
+                  className="bg-blue-600"
+                >
+                  Edit
+                </button>
+                <button className="bg-red-700" onClick={handleDelete}>
+                  Delete
+                </button>
+                <button className="bg-red-700" onClick={handleCartAction}>
+                  {isItemInCart ? "Remove from Cart" : "Add to Cart"}
+                </button>
+              </div>
             </div>
           )}
         </>

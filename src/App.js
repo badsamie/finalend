@@ -1,6 +1,7 @@
 import React from "react";
 import MainRoutes from "./routing/MainRoutes";
 import Navbar from "./components/ui/Navbar";
+// import HomePage from "./pages/HomePage";
 
 
 
@@ -10,6 +11,7 @@ const App = () => {
     <>
       <Navbar />
       <MainRoutes />
+      {/* <HomePage/> */}
 
     </>
   );

@@ -20,41 +20,51 @@ const Login = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center h-screen ">
       {loading ? (
-        <div>Loading...</div>
+        <div className="text-2xl">Loading...</div>
       ) : (
         <>
           {status ? (
-            <div>
-              <h3>An error occurred!</h3>
-              <button onClick={() => dispatch(clearStatusState())}>
+            <div className="text-center">
+              <h3 className="text-red-500 text-2xl">An error occurred!</h3>
+              <button
+                onClick={() => dispatch(clearStatusState())}
+                className="bg-purple-500 text-white px-4 py-2 mt-2 rounded-full"
+              >
                 Try again!
               </button>
             </div>
           ) : (
-            <div>
-              <h3>Sign In</h3>
+            <div className="text-center">
+              <h3 className="text-black text-2xl mb-4">Sig in</h3>
               <input
                 type="text"
-                placeholder="email"
+                placeholder="Email или имя пользователя"
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
+                className="border p-2 mb-4"
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Пароль"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
+                className="border p-2 mb-4"
               />
-              <button
-                onClick={() => dispatch(loginAccount({ user, navigate }))}
-              >
-                Login
-              </button>
+              <div className="flex justify-between items-center mb-4">
+                <button
+                  onClick={() => dispatch(loginAccount({ user, navigate }))}
+                  className="bg-purple-500 text-white px-4 py-2 rounded-full"
+                >
+                  Войти
+                </button>
+                <a href="/">Забыли?</a>
+              </div>
+              <span>Или</span>
             </div>
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 
