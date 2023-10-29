@@ -6,6 +6,7 @@ import {
 } from "../../store/products/productsActions";
 import ProductItem from "./ProductItem";
 import ProductsPagination from "./ProductsPagination";
+import { Link } from "react-router-dom"; // Импортируем Link из react-router-dom
 
 const ProductsList = () => {
   const { products, loading } = useSelector((state) => state.products);
@@ -15,6 +16,7 @@ const ProductsList = () => {
     dispatch(getTotalPages());
     dispatch(getProducts());
   }, []);
+
   return (
     <>
       {loading ? (
@@ -22,8 +24,10 @@ const ProductsList = () => {
       ) : (
         <div className="flex flex-wrap ">
           <ProductsPagination />
-          {products.map((products) => (
-            <ProductItem key={products.id} product={products} />
+          {products.map((product) => (
+            <Link key={product.id} to={`/details/${product.id}`}> 
+              <ProductItem product={product} />
+            </Link>
           ))}
         </div>
       )}
