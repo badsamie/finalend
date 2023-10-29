@@ -12,6 +12,7 @@ import Cart from "../components/cart/Cart";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import DomPage from "../pages/DomPage";
+import PayPage from "../pages/PayPage";
 
 
 const MainRoutes = () => {
@@ -76,6 +77,11 @@ const MainRoutes = () => {
       id: 12,
       path: "/dompage",
       element: <DomPage/>,
+    },
+    {
+      id: 12,
+      path: "/paypage",
+      element: <PayPage/>,
     },
   ];
 
