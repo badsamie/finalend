@@ -20,7 +20,7 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen mt-10">
+    <div className="flex flex-col items-center justify-center h-screen ">
       {loading ? (
         <div className="text-2xl">Loading...</div>
       ) : (
@@ -37,36 +37,35 @@ const Login = () => {
             </div>
           ) : (
             <div className="text-center">
-              <h3 className="text-black text-2xl mb-4">Sign In</h3>
+              <h3 className="text-black text-2xl mb-4">Sig in</h3>
               <input
                 type="text"
-                placeholder="email"
+                placeholder="Email или имя пользователя"
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                 className="border p-2 mb-4"
               />
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Пароль"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 className="border p-2 mb-4"
               />
-              <button
-                onClick={() => dispatch(loginAccount({ user, navigate }))}
-                className="bg-purple-500 text-white px-4 py-2 rounded-full"
-              >
-                Login
-              </button>
+              <div className="flex justify-between items-center mb-4">
+                <button
+                  onClick={() => dispatch(loginAccount({ user, navigate }))}
+                  className="bg-purple-500 text-white px-4 py-2 rounded-full"
+                >
+                  Войти
+                </button>
+                <a href="/">Забыли?</a>
+              </div>
+              <span>Или</span>
             </div>
           )}
         </>
       )}
     </div>
   );
-  
-  
-  
-  
-  
 };
 
 export default Login;
