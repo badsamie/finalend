@@ -9,11 +9,18 @@ import Login from "../components/account/Login";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 import ProductEditPage from "../pages/ProductEditPage";
 import Cart from "../components/cart/Cart";
+import RegisterPage from "../pages/RegisterPage";
+import HomePage from "../pages/HomePage";
+import DomPage from "../pages/DomPage";
 
 
 const MainRoutes = () => {
   const ROUTES = [
- 
+    {
+      id: 111,
+      path: "/",
+      element: <HomePage />,
+    },
     {
       id: 1,
       path: "/products",
@@ -37,8 +44,8 @@ const MainRoutes = () => {
     },
     {
       id: 5,
-      path: "/register",
-      element: <Register />,
+      path: "/registerPage",
+      element: <RegisterPage />,
     },
     {
       id: 6,
@@ -59,6 +66,16 @@ const MainRoutes = () => {
       id: 9,
       path: "/chat",
       element: <Chat />,
+    },
+    {
+      id: 11,
+      path: "/register",
+      element: <Register/>,
+    },
+    {
+      id: 12,
+      path: "/dompage",
+      element: <DomPage/>,
     },
   ];
 

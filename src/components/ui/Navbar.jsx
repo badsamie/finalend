@@ -38,6 +38,12 @@ const Navbar = () => {
       >
         CART
       </h4>
+      <h4
+        className="cursor-pointer bg-blue-400"
+        onClick={() => navigate("/dompage")}
+      >
+        dom
+      </h4>
     </div>
   );
 };

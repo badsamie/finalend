@@ -20,33 +20,39 @@ const Login = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center h-screen mt-10">
       {loading ? (
-        <div>Loading...</div>
+        <div className="text-2xl">Loading...</div>
       ) : (
         <>
           {status ? (
-            <div>
-              <h3>An error occurred!</h3>
-              <button onClick={() => dispatch(clearStatusState())}>
+            <div className="text-center">
+              <h3 className="text-red-500 text-2xl">An error occurred!</h3>
+              <button
+                onClick={() => dispatch(clearStatusState())}
+                className="bg-purple-500 text-white px-4 py-2 mt-2 rounded-full"
+              >
                 Try again!
               </button>
             </div>
           ) : (
-            <div>
-              <h3>Sign In</h3>
+            <div className="text-center">
+              <h3 className="text-black text-2xl mb-4">Sign In</h3>
               <input
                 type="text"
                 placeholder="email"
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
+                className="border p-2 mb-4"
               />
               <input
                 type="password"
                 placeholder="Password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
+                className="border p-2 mb-4"
               />
               <button
                 onClick={() => dispatch(loginAccount({ user, navigate }))}
+                className="bg-purple-500 text-white px-4 py-2 rounded-full"
               >
                 Login
               </button>
@@ -54,8 +60,13 @@ const Login = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
+  
+  
+  
+  
+  
 };
 
 export default Login;

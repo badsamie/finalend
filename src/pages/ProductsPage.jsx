@@ -6,7 +6,7 @@ import ProductsSearch from "../components/products/ProductsSearch";
 const ProductsPage = () => {
   const dispatch = useDispatch();
   return (
-    <div>
+    <div className="flex flex-row justify-around">
       <ProductsList />
       <ProductsSearch />
     </div>

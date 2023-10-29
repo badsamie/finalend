@@ -52,8 +52,8 @@ const ProductDetails = () => {
       ) : (
         <>
           {oneProduct && (
-            <div>
-              <h3>Title:{oneProduct.title}</h3>
+            <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
+              <h3 className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">Title:{oneProduct.title}</h3>
               {oneProduct.images.length && (
                 <img
                   className="w-36 h-56"
@@ -61,11 +61,11 @@ const ProductDetails = () => {
                   alt=""
                 />
               )}
-              <p>Location:{oneProduct.location}</p>
+              <p className="mt-4 text-gray-600">Location:{oneProduct.location}</p>
               <p>Price:{oneProduct.price}</p>
-              <p>$:{oneProduct.price_dollar}</p>
+              <p className="mt-8 inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400">$:{oneProduct.price_dollar}</p>
               <p>Education:{oneProduct.education}</p>
-              <p>Desc:{oneProduct.description}</p>
+              <p className="mt-4 text-gray-600">Desc:{oneProduct.description}</p>
               <p>count_views:{oneProduct.count_views}</p>
               <p>Category:{oneProduct.category}</p>
               <p>{oneProduct.updated_at}</p>

@@ -36,8 +36,8 @@ const ProductEdit = () => {
       ) : (
         <>
           {product && (
-            <div>
-              <h2>Create Page</h2>
+            <div className="mx-auto w-1/4 flex flex-col justify-center items-center m-24">
+              <h2 className="mb-8 font-bold text-3xl text-center">Create Page</h2>
               <input
                 className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
                 type="text"
