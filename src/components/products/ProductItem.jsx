@@ -1,10 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 const ProductItem = ({ product }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   return (
     <div className="ml-1 rounded-xl border-purple-400 border w-24 p-2">
