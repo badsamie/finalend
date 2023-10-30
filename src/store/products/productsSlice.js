@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addRating,
   getCategories,
   getOneProduct,
   getProducts,
@@ -58,9 +59,6 @@ const productSlice = createSlice({
       state.search = "";
       state.priceRange = "";
     },
-    ratingAdd: (state, action) => {
-      state.rating = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,7 +87,10 @@ const productSlice = createSlice({
       })
       .addCase(getTotalPages.fulfilled, (state, action) => {
         state.totalPages = action.payload;
-      });
+      })
+      // .addCase(addRating.fulfilled, (state, action) => {
+      //   state.rating = action.payload;
+      // });
   },
 });
 export const {
