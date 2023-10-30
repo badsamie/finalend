@@ -18,8 +18,6 @@ const productSlice = createSlice({
     search: "",
     category: [],
     image: [],
-    priceRange: "",
-    rating: ""
   },
   reducers: {
     clearOneProductState: (state) => {
@@ -57,9 +55,6 @@ const productSlice = createSlice({
       state.currentCategory = "";
       state.search = "";
       state.priceRange = "";
-    },
-    ratingAdd: (state, action) => {
-      state.rating = action.payload;
     },
   },
   extraReducers: (builder) => {

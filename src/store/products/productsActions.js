@@ -7,16 +7,13 @@ import { getAuthConfig } from "../../helpers/functions";
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, { getState }) => {
-    const { currentPage, search, ratingAdd } = getState().products;
+    const { currentPage, search } = getState().products;
     const queryParams = [];
     if (currentPage) {
       queryParams.push(`page=${currentPage}`);
     }
     if (search) {
       queryParams.push(`search=${search}`);
-    }
-    if (ratingAdd) {
-      queryParams.push(`/rating/`);
     }
     const queryString =
       queryParams.length > 0 ? `?${queryParams.join("&")}` : "";
@@ -30,19 +27,32 @@ export const getProducts = createAsyncThunk(
 export const getTotalPages = createAsyncThunk(
   "products/getTotalPages",
   async () => {
-    let products = null;
+    let prikol;
     let totalPages = 1;
-    do {
-      let { data } = await axios.get(
-        `${PRODUCTS_API}/api/v1/apartment/?page=${totalPages}`
-      );
-      products = data.result;
-      totalPages++;
-    } while (products);
+
+    while (true) {
+      try {
+        let { data } = await axios.get(
+          `${PRODUCTS_API}/api/v1/apartment/?page=${totalPages}`
+        );
+        if (data.results) {
+          prikol = data.results;
+          totalPages++;
+        } else {
+          totalPages--;
+          break;
+        }
+      } catch (err) {
+        totalPages--;
+        prikol = null;
+        break;
+      }
+    }
 
     return totalPages;
   }
 );
+
 export const getOneProduct = createAsyncThunk(
   "products/getOneProduct",
   async ({ id }) => {
@@ -52,7 +62,7 @@ export const getOneProduct = createAsyncThunk(
 );
 export const createProduct = createAsyncThunk(
   "products/createProduct",
-  async ({ product }) => {
+  async ({ product }, { dispatch }) => {
     try {
       const productData = new FormData();
       productData.append("title", product.title);
@@ -64,24 +74,67 @@ export const createProduct = createAsyncThunk(
       productData.append("category", product.category);
       productData.append("count_views", product.count_views);
       await axios.post(`${PRODUCTS_API}/api/v1/apartment/`, productData);
+      dispatch(getProducts());
     } catch (err) {
       console.log(err);
     }
   }
 );
+
+const getToken = () => {
+  return JSON.parse(localStorage.getItem("tokens"));
+};
+
 export const addRating = createAsyncThunk(
   "products/addRating",
-  async ({ product }) => {
+  async ({ id, rating }, { dispatch }) => {
     try {
       const ratingData = new FormData();
-      ratingData.append("rating", product.rating);
-      await axios.post(`${PRODUCTS_API}/api/v1/apartment/rating/`, ratingData);
+      ratingData.append("rating", rating);
+      const tokens = getToken();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      };
+
+      await axios.post(
+        `${PRODUCTS_API}/api/v1/apartment/${product.id}/rating/`,
+        ratingData,
+        config
+      );
     } catch (err) {
       console.log(err, "не добавляет");
     }
+    dispatch(getOneProduct({ id }));
   }
 );
+export const addLike = createAsyncThunk(
+  "products/addRating",
+  async ({ id, like_count }, { dispatch }) => {
+    try {
+      const ratingData = new FormData();
+      ratingData.append("like_count", like_count);
 
+      const tokens = getToken();
+      // console.log(tokens);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      };
+
+      await axios.post(
+        `${PRODUCTS_API}/api/v1/apartment/${id}/like/`,
+        ratingData,
+        config
+      );
+    } catch (err) {
+      console.log(err, "нет лайка");
+    }
+    dispatch(getOneProduct({ id }));
+  }
+);
 export const createImage = createAsyncThunk(
   "products/createImage",
   async ({ product }, { dispatch }) => {
@@ -90,7 +143,7 @@ export const createImage = createAsyncThunk(
       imgData.append("post", product.id);
       console.log(product.image);
       imgData.append("image", product.image);
-      //
+
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -107,23 +160,44 @@ export const createImage = createAsyncThunk(
     }
   }
 );
-// export const deleteProduct = createAsyncThunk(
-//   "products/deleteProduct",
-//   async ({ id }, { dispatch }) => {
-//     await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`);
-//     dispatch(getProducts());
-//   }
-// );
+
+export const createComment = createAsyncThunk(
+  "products/createComment",
+  async ({ product, comment }, { dispatch }) => {
+    try {
+      const comData = new FormData();
+      comData.append("body", comment);
+      comData.append("apartment", product.id);
+
+      const tokens = getToken();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      };
+
+      await axios.post(
+        `${PRODUCTS_API}/api/v1/apartment/comments/`,
+        comData,
+        config
+      );
+
+      dispatch(getProducts());
+    } catch (error) {
+      console.log(error, "soska");
+    }
+  }
+);
+
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id, oneProduct }, { dispatch }) => {
     await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`).then(() => {
-      dispatch(toggleCart(oneProduct));
+      // dispatch(toggleCart(oneProduct));
       dispatch(getProducts());
     });
   }
 );
-
 export const editProduct = createAsyncThunk(
   "products/editProduct",
   async ({ product }, { dispatch }) => {

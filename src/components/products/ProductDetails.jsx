@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  addRating,
   deleteProduct,
   getOneProduct,
-  getProducts,
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
 import { isUserLogin } from "../../helpers/functions";
 
+import ProductsRating from "./ProductsRating";
+import {
+  removeAllFromFav,
+  toggleFav,
+} from "../../store/favorite/favoriteslice";
+import ProductLike from "./ProductLike";
+import ProductComment from "./ProductComment";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -19,9 +24,12 @@ const ProductDetails = () => {
   const { loading, oneProduct, rating } = useSelector(
     (state) => state.products
   );
+ 
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
+  const favItems = useSelector((state) => state.fav.items) || [];
 
+  // console.log(oneProduct);
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
@@ -32,12 +40,20 @@ const ProductDetails = () => {
   }
 
   const isItemInCart = cartItems.some((item) => item.id === oneProduct.id);
+  const isItemInFav = favItems.some((items) => items.id === oneProduct.id);
 
   const handleCartAction = () => {
     if (isItemInCart) {
       dispatch(removeFromCart(oneProduct.id));
     } else {
       dispatch(toggleCart(oneProduct));
+    }
+  };
+  const handleFavAction = () => {
+    if (isItemInFav) {
+      dispatch(removeAllFromFav(oneProduct.id));
+    } else {
+      dispatch(toggleFav(oneProduct));
     }
   };
 
@@ -95,6 +111,17 @@ const ProductDetails = () => {
                 >
                   Send
                 </button>
+                <p>Rating: {oneProduct ? oneProduct.rating : "Нет рейтинга"}</p>
+                <p>like:{oneProduct.like_count}</p>
+                <div>
+                  {oneProduct.comments.map((comment) => (
+                    <>
+                      <span>@{comment.owner}</span>
+                      <p>{comment.body}</p>
+                    </>
+                  ))}
+                </div>
+                <ProductComment product={oneProduct} />
                 <button
                   onClick={() => navigate(`/edit/${oneProduct.id}`)}
                   className="bg-blue-600"
@@ -104,13 +131,27 @@ const ProductDetails = () => {
                 <button className="bg-red-700" onClick={handleDelete}>
                   Delete
                 </button>
+                <span>----</span>
                 <button className="bg-red-700" onClick={handleCartAction}>
                   {isItemInCart ? (
                     <button className="bg-red-700">Remove from Cart</button>
                   ) : (
                     <button className="bg-blue-600">Add to Cart</button>
+                    <button className="bg-blue-600">add cart </button>
+                  ) : (
+                    <button className="bg-red-700">delete cart </button>
                   )}
                 </button>
+                --
+                <button onClick={handleFavAction}>
+                  {!isItemInFav ? (
+                    <button className="bg-blue-600">add fav</button>
+                  ) : (
+                    <button className="bg-red-700">delete fav</button>
+                  )}
+                </button>
+                <ProductsRating />
+                <ProductLike />
               </div>
             </div>
           )}
