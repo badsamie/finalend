@@ -30,6 +30,26 @@ export const logout = () => {
   localStorage.removeItem("tokens");
 };
 
+export const isUserLogin = () => {
+  const user = localStorage.getItem("user");
+  if (!user) return false;
+  return true;
+};
+
+
+export const getAuthConfig = () => {
+  const tokens = JSON.parse(localStorage.getItem("tokens"));
+  if (!tokens) return false;
+  const Authorization = `Bearer ${tokens.access}`;
+  const config = {
+      headers: {
+          Authorization,
+      },
+  };
+  return config;
+};
+
+
 export const getProductRating = (productObj) => {
   const rating =
     productObj.comments.reduce((acc, commentObj) => {

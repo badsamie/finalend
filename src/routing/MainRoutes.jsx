@@ -12,6 +12,7 @@ import Cart from "../components/cart/Cart";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import DomPage from "../pages/DomPage";
+import PayPage from "../pages/PayPage/PayPage"
 
 
 const MainRoutes = () => {
@@ -77,6 +78,11 @@ const MainRoutes = () => {
       path: "/dompage",
       element: <DomPage/>,
     },
+    {
+      id: 13,
+      path: "/order",
+      element: <PayPage />
+    }
   ];
 
   return (

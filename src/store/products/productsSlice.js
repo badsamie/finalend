@@ -19,7 +19,7 @@ const productSlice = createSlice({
     category: [],
     image: [],
     priceRange: "",
-    rating: "",
+    rating: ""
   },
   reducers: {
     clearOneProductState: (state) => {

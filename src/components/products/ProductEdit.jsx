@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  createComment,
   createImage,
   editProduct,
   getCategories,
@@ -83,6 +84,7 @@ const ProductEdit = () => {
                 }
                 value={product.description}
               />
+              <input type="text" onChange={(e) => setProduct({...product, comment: e.target.value})} />
               <select
                 onChange={(e) =>
                   setProduct({ ...product, category: e.target.value })

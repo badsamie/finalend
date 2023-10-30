@@ -22,7 +22,7 @@ const ProductsList = () => {
       {loading ? (
         <h3>loading...</h3>
       ) : (
-        <div className="flex flex-wrap ">
+        <div className="flex flex-wrap mt-48">
           <ProductsPagination />
           {products.map((product) => (
             <Link key={product.id} to={`/details/${product.id}`}> 
