@@ -1,16 +1,17 @@
-import React from "react";
-import { ChatEngine } from "react-chat-engine";
+import React from 'react'
+import {ChatEngine} from 'react-chat-engine'
 
 const Chat = () => {
   return (
-    <div>
-      <ChatEngine
-        projectID="ff2b18a6-567f-4247-b126-12427b4328e7"
-        userName="cha yan"
-        userSecret="123"
-      />
-    </div>
-  );
-};
+    <>
+    <ChatEngine
+    projectID = "f6d10f2d-d27b-4d00-9c8f-c4fb1512dbb5"
+    userName = "사비나"
+    userSecret = "sabina"
+     />
+    </>
+  )
+}
+
 
 export default Chat;

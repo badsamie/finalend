@@ -7,6 +7,8 @@ import {
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
+import { isUserLogin } from "../../helpers/functions";
+
 import ProductsRating from "./ProductsRating";
 import {
   removeAllFromFav,
@@ -18,7 +20,11 @@ import ProductComment from "./ProductComment";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, oneProduct } = useSelector((state) => state.products);
+  const [reting, setReting] = useState();
+  const { loading, oneProduct, rating } = useSelector(
+    (state) => state.products
+  );
+ 
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
   const favItems = useSelector((state) => state.fav.items) || [];
@@ -79,7 +85,7 @@ const ProductDetails = () => {
               <div className="text-gray-600">
                 <p>Location: {oneProduct.location}</p>
                 <p>Price: {oneProduct.price}</p>
-                <p className="inline-block rounded bg-purple-500 px-12 py-3 text-sm font-medium text-white transition bg-indigo-700">
+                <p className="inline-block rounded bg-purple-500 px-12 py-3 text-sm font-medium text-white transition">
                   $: {oneProduct.price_dollar}
                 </p>
                 <p>Education: {oneProduct.education}</p>
@@ -89,6 +95,23 @@ const ProductDetails = () => {
                 <p>count_views: {oneProduct.count_views}</p>
                 <p>Category: {oneProduct.category}</p>
                 <p>{oneProduct.updated_at}</p>
+                <p>Rating: {oneProduct.rating}</p>
+                <input
+                  type="number"
+                  onChange={(e) => setReting(e.target.value)}
+                />
+              </div>
+              
+              <div className="mt-4">
+                <button
+                  onClick={() => {
+                    dispatch(addRating({ product: { rating: reting } }));
+                    dispatch(getProducts());
+                    setReting("");
+                  }}
+                >
+                  Send
+                </button>
                 <p>Rating: {oneProduct ? oneProduct.rating : "Нет рейтинга"}</p>
                 <p>like:{oneProduct.like_count}</p>
                 <div>
@@ -112,6 +135,9 @@ const ProductDetails = () => {
                 <span>----</span>
                 <button className="bg-red-700" onClick={handleCartAction}>
                   {isItemInCart ? (
+                    <button className="bg-red-700">Remove from Cart</button>
+                  ) : (
+                    <button className="bg-blue-600">Add to Cart</button>
                     <button className="bg-blue-600">add cart </button>
                   ) : (
                     <button className="bg-red-700">delete cart </button>
