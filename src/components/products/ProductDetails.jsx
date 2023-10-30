@@ -15,7 +15,6 @@ import {
 import ProductLike from "./ProductLike";
 import ProductComment from "./ProductComment";
 
-
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -111,11 +110,19 @@ const ProductDetails = () => {
                 </button>
                 <span>----</span>
                 <button className="bg-red-700" onClick={handleCartAction}>
-                  {isItemInCart ? "Remove from Cart" : "Add to Cart"}
+                  {isItemInCart ? (
+                    <button className="bg-blue-600">add cart </button>
+                  ) : (
+                    <button className="bg-red-700">delete cart </button>
+                  )}
                 </button>
                 --
                 <button onClick={handleFavAction}>
-                  {!isItemInFav ? "add fav" : "delete fav"}
+                  {!isItemInFav ? (
+                    <button className="bg-blue-600">add fav</button>
+                  ) : (
+                    <button className="bg-red-700">delete fav</button>
+                  )}
                 </button>
                 <ProductsRating />
                 <ProductLike />
