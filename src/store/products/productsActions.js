@@ -86,11 +86,10 @@ const getToken = () => {
 
 export const addRating = createAsyncThunk(
   "products/addRating",
-  async ({ product }) => {
+  async ({ id, rating }, { dispatch }) => {
     try {
       const ratingData = new FormData();
-      ratingData.append("rating", product.rating);
-      await axios.post(`${PRODUCTS_API}/api/v1/apartment/rating/`, ratingData);
+      ratingData.append("rating", rating);
       const tokens = getToken();
       const config = {
         headers: {
@@ -106,6 +105,7 @@ export const addRating = createAsyncThunk(
     } catch (err) {
       console.log(err, "не добавляет");
     }
+    dispatch(getOneProduct({ id }));
   }
 );
 export const addLike = createAsyncThunk(
