@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  addRating,
   deleteProduct,
   getOneProduct,
+  getProducts,
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
@@ -20,11 +22,10 @@ import ProductComment from "./ProductComment";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [reting, setReting] = useState();
   const { loading, oneProduct, rating } = useSelector(
     (state) => state.products
   );
- 
+
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
   const favItems = useSelector((state) => state.fav.items) || [];
@@ -96,18 +97,13 @@ const ProductDetails = () => {
                 <p>Category: {oneProduct.category}</p>
                 <p>{oneProduct.updated_at}</p>
                 <p>Rating: {oneProduct.rating}</p>
-                <input
-                  type="number"
-                  onChange={(e) => setReting(e.target.value)}
-                />
               </div>
-              
+
               <div className="mt-4">
                 <button
                   onClick={() => {
-                    dispatch(addRating({ product: { rating: reting } }));
+                    dispatch(addRating({}));
                     dispatch(getProducts());
-                    setReting("");
                   }}
                 >
                   Send
@@ -138,9 +134,6 @@ const ProductDetails = () => {
                     <button className="bg-red-700">Remove from Cart</button>
                   ) : (
                     <button className="bg-blue-600">Add to Cart</button>
-                    <button className="bg-blue-600">add cart </button>
-                  ) : (
-                    <button className="bg-red-700">delete cart </button>
                   )}
                 </button>
                 --
