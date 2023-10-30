@@ -28,15 +28,17 @@ const ProductCreate = () => {
 
   return (
     <div className="mx-auto w-1/4 flex flex-col justify-center items-center m-24">
-      <h3 className="mb-8 font-bold text-3xl text-center text-blue-500">Create Product</h3>
+      <h3 className="mb-8 font-bold text-3xl text-center text-blue-500">
+        Create Product
+      </h3>
       <input
-      className="border border-slate-300 w-full p-3 rounded mb-4"
+        className="border border-slate-300 w-full p-3 rounded mb-4"
         type="text"
         placeholder="title"
         onChange={(e) => setProduct({ ...product, title: e.target.value })}
       />
       <input
-      className="border border-slate-300 w-full p-3 rounded mb-4"
+        className="border border-slate-300 w-full p-3 rounded mb-4"
         type="text"
         placeholder="location"
         onChange={(e) => setProduct({ ...product, location: e.target.value })}
@@ -48,7 +50,7 @@ const ProductCreate = () => {
         onChange={(e) => setProduct({ ...product, education: e.target.value })}
       />
       <input
-      className="border border-slate-300 w-full p-3 rounded mb-4"
+        className="border border-slate-300 w-full p-3 rounded mb-4"
         type="text"
         placeholder="description"
         onChange={(e) =>
@@ -56,7 +58,7 @@ const ProductCreate = () => {
         }
       />
       <input
-      className="border border-slate-300 w-full p-3 rounded mb-4"
+        className="border border-slate-300 w-full p-3 rounded mb-4"
         type="text"
         placeholder="price_dollar (only num)"
         onChange={(e) =>
@@ -64,7 +66,7 @@ const ProductCreate = () => {
         }
       />
       <input
-      className="border border-slate-300 w-full p-3 rounded mb-4"
+        className="border border-slate-300 w-full p-3 rounded mb-4"
         type="text"
         placeholder="price (only num)"
         onChange={(e) =>
@@ -84,10 +86,11 @@ const ProductCreate = () => {
           </option>
         ))}
       </select>
-      <button 
-      className="w-full text-center py-3 rounded bg-blue-500 font-bold text-white hover:bg-pink-700"
+      <button
+        className="w-full text-center py-3 rounded bg-blue-500 font-bold text-white hover:bg-pink-700"
         onClick={() => {
           dispatch(createProduct({ product }));
+          dispatch(getProducts());
           navigate("/products");
         }}
       >
@@ -98,4 +101,3 @@ const ProductCreate = () => {
 };
 
 export default ProductCreate;
-

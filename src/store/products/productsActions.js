@@ -68,16 +68,34 @@ export const createProduct = createAsyncThunk(
     }
   }
 );
+const getToken = () => {
+  return JSON.parse(localStorage.getItem("tokens"));
+};
+
 export const addRating = createAsyncThunk(
   "products/addRating",
-  async ({ product }) => {
+  async ({ id, rating }, { dispatch }) => {
     try {
       const ratingData = new FormData();
-      ratingData.append("rating", product.rating);
-      await axios.post(`${PRODUCTS_API}/api/v1/apartment/rating/`, ratingData);
+      ratingData.append("rating", rating);
+
+      const tokens = getToken();
+      console.log(tokens);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      };
+
+      await axios.post(
+        `${PRODUCTS_API}/api/v1/apartment/${id}/rating/`,
+        ratingData,
+        config
+      );
     } catch (err) {
       console.log(err, "не добавляет");
     }
+    dispatch(getOneProduct({ id }));
   }
 );
 
@@ -106,13 +124,7 @@ export const createImage = createAsyncThunk(
     }
   }
 );
-// export const deleteProduct = createAsyncThunk(
-//   "products/deleteProduct",
-//   async ({ id }, { dispatch }) => {
-//     await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`);
-//     dispatch(getProducts());
-//   }
-// );
+
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id, oneProduct }, { dispatch }) => {
