@@ -175,33 +175,6 @@ export const createComment = createAsyncThunk(
     }
   }
 );
-export const deleteComment = createAsyncThunk(
-  "products/createComment",
-  async ({ product, comment }, { dispatch }) => {
-    try {
-      const comData = new FormData();
-      comData.append("body", comment);
-      comData.append("apartment", product.id);
-
-      const tokens = getToken();
-      const config = {
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
-        },
-      };
-
-      await axios.delete(
-        `${PRODUCTS_API}/api/v1/apartment/comments/${product.id}`,
-        comData,
-        config
-      );
-
-      dispatch(getProducts());
-    } catch (error) {
-      console.log(error, "soska");
-    }
-  }
-);
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id, oneProduct }, { dispatch }) => {
