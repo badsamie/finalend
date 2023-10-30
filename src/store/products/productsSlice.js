@@ -19,8 +19,6 @@ const productSlice = createSlice({
     search: "",
     category: [],
     image: [],
-    priceRange: "",
-    rating: "",
   },
   reducers: {
     clearOneProductState: (state) => {
@@ -87,10 +85,7 @@ const productSlice = createSlice({
       })
       .addCase(getTotalPages.fulfilled, (state, action) => {
         state.totalPages = action.payload;
-      })
-      // .addCase(addRating.fulfilled, (state, action) => {
-      //   state.rating = action.payload;
-      // });
+      });
   },
 });
 export const {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  createComment,
   createImage,
   editProduct,
   getCategories,
@@ -23,7 +24,6 @@ const ProductEdit = () => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
   }, []);
-
   useEffect(() => {
     if (oneProduct) {
       setProduct(oneProduct);
@@ -37,7 +37,9 @@ const ProductEdit = () => {
         <>
           {product && (
             <div className="mx-auto w-1/4 flex flex-col justify-center items-center m-24">
-              <h2 className="mb-8 font-bold text-3xl text-center">Create Page</h2>
+              <h2 className="mb-8 font-bold text-3xl text-center">
+                Create Page
+              </h2>
               <input
                 className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
                 type="text"
@@ -103,7 +105,6 @@ const ProductEdit = () => {
                   setProduct({ ...product, image: selectedFile });
                 }}
               />
-
               <button
                 onClick={() => {
                   dispatch(editProduct({ product }));

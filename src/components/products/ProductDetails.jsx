@@ -9,6 +9,7 @@ import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
 import ProductsRating from "./ProductsRating";
 import ProductLike from "./ProductLike";
+import ProductComment from "./ProductComment";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
 
-  console.log(oneProduct);
+  // console.log(oneProduct);
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
@@ -76,6 +77,15 @@ const ProductDetails = () => {
                 <p>{oneProduct.updated_at}</p>
                 <p>Rating: {oneProduct ? oneProduct.rating : "Нет рейтинга"}</p>
                 <p>like:{oneProduct.like_count}</p>
+                <div>
+                  {oneProduct.comments.map((comment) => (
+                    <>
+                      <span>@{comment.owner}</span>
+                      <p>{comment.body}</p>
+                    </>
+                  ))}
+                </div>
+                <ProductComment product={oneProduct} />
                 <button
                   onClick={() => navigate(`/edit/${oneProduct.id}`)}
                   className="bg-blue-600"
