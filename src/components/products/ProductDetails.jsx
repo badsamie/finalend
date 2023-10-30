@@ -8,6 +8,10 @@ import {
 import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
 import ProductsRating from "./ProductsRating";
+import {
+  removeAllFromFav,
+  toggleFav,
+} from "../../store/favorite/favoriteslice";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -15,6 +19,7 @@ const ProductDetails = () => {
   const { loading, oneProduct } = useSelector((state) => state.products);
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
+  const favItems = useSelector((state) => state.fav.items) || [];
 
   useEffect(() => {
     dispatch(getOneProduct({ id }));
@@ -26,12 +31,20 @@ const ProductDetails = () => {
   }
 
   const isItemInCart = cartItems.some((item) => item.id === oneProduct.id);
+  const isItemInFav = favItems.some((items) => items.id === oneProduct.id);
 
   const handleCartAction = () => {
     if (isItemInCart) {
       dispatch(removeFromCart(oneProduct.id));
     } else {
       dispatch(toggleCart(oneProduct));
+    }
+  };
+  const handleFavAction = () => {
+    if (isItemInFav) {
+      dispatch(removeAllFromFav(oneProduct.id));
+    } else {
+      dispatch(toggleFav(oneProduct));
     }
   };
 
@@ -85,6 +98,10 @@ const ProductDetails = () => {
                 <span>----</span>
                 <button className="bg-red-700" onClick={handleCartAction}>
                   {isItemInCart ? "Remove from Cart" : "Add to Cart"}
+                </button>
+                --
+                <button onClick={handleFavAction}>
+                  {!isItemInFav ? "add fav" : "delete fav"}
                 </button>
                 <ProductsRating />
               </div>
