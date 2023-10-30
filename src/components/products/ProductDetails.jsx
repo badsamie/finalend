@@ -12,6 +12,9 @@ import {
   removeAllFromFav,
   toggleFav,
 } from "../../store/favorite/favoriteslice";
+import ProductLike from "./ProductLike";
+import ProductComment from "./ProductComment";
+
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ const ProductDetails = () => {
   const cartItems = useSelector((state) => state.cart.items) || [];
   const favItems = useSelector((state) => state.fav.items) || [];
 
+  // console.log(oneProduct);
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
@@ -86,6 +90,16 @@ const ProductDetails = () => {
                 <p>Category: {oneProduct.category}</p>
                 <p>{oneProduct.updated_at}</p>
                 <p>Rating: {oneProduct ? oneProduct.rating : "Нет рейтинга"}</p>
+                <p>like:{oneProduct.like_count}</p>
+                <div>
+                  {oneProduct.comments.map((comment) => (
+                    <>
+                      <span>@{comment.owner}</span>
+                      <p>{comment.body}</p>
+                    </>
+                  ))}
+                </div>
+                <ProductComment product={oneProduct} />
                 <button
                   onClick={() => navigate(`/edit/${oneProduct.id}`)}
                   className="bg-blue-600"
@@ -104,6 +118,7 @@ const ProductDetails = () => {
                   {!isItemInFav ? "add fav" : "delete fav"}
                 </button>
                 <ProductsRating />
+                <ProductLike />
               </div>
             </div>
           )}
