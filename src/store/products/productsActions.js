@@ -96,7 +96,7 @@ export const addRating = createAsyncThunk(
       };
 
       await axios.post(
-        `${PRODUCTS_API}/api/v1/apartment/${product.id}/rating/`,
+        `${PRODUCTS_API}/api/v1/apartment/${id}/rating/`,
         ratingData,
         config
       );
