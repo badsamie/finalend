@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PRODUCTS_API } from "../../helpers/consts";
 import { toggleCart } from "../cart/cartSlice";
+import { Favorite } from "@mui/icons-material/Favorite";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
@@ -94,6 +95,32 @@ export const addRating = createAsyncThunk(
       );
     } catch (err) {
       console.log(err, "не добавляет");
+    }
+    dispatch(getOneProduct({ id }));
+  }
+);
+export const addLike = createAsyncThunk(
+  "products/addRating",
+  async ({ id, like_count }, { dispatch }) => {
+    try {
+      const ratingData = new FormData();
+      ratingData.append("like_count", like_count);
+
+      const tokens = getToken();
+      // console.log(tokens);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      };
+
+      await axios.post(
+        `${PRODUCTS_API}/api/v1/apartment/${id}/like/`,
+        ratingData,
+        config
+      );
+    } catch (err) {
+      console.log(err, "нет лайка");
     }
     dispatch(getOneProduct({ id }));
   }

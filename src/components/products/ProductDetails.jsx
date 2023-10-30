@@ -8,6 +8,7 @@ import {
 import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
 import ProductsRating from "./ProductsRating";
+import ProductLike from "./ProductLike";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
 
+  console.log(oneProduct);
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
@@ -73,6 +75,7 @@ const ProductDetails = () => {
                 <p>Category: {oneProduct.category}</p>
                 <p>{oneProduct.updated_at}</p>
                 <p>Rating: {oneProduct ? oneProduct.rating : "Нет рейтинга"}</p>
+                <p>like:{oneProduct.like_count}</p>
                 <button
                   onClick={() => navigate(`/edit/${oneProduct.id}`)}
                   className="bg-blue-600"
@@ -87,6 +90,7 @@ const ProductDetails = () => {
                   {isItemInCart ? "Remove from Cart" : "Add to Cart"}
                 </button>
                 <ProductsRating />
+                <ProductLike />
               </div>
             </div>
           )}
