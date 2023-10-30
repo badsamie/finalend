@@ -35,35 +35,35 @@ const Register = () => {
             </div>
           ) : (
             <>
-              <div className="text-center">
-              <h1 className="text-3xl font-bold mb-4 text-purple-500">Отлично!</h1>
-              <h3 className="text-xl text-purple-500">Теперь введите свою почту</h3>
-
+              <div className="text-center w-2/6 -mt-64">
+              <h1 className="text-violet-500 text-center uppercase font-bold text-4xl mb-4">greate!</h1>
+              <h3 className="mt-4 text-lg text-violet-400 uppercase font-bold">now enter your email</h3>
+              <div className="flex flex-col w-full mt-12 mb-9 ">
                 <input
                   type="email"
                   onChange={(e) => setUser({ ...user, email: e.target.value })}
                   placeholder="Email"
-                  className="border p-2 mb-4"
+                    className="border p-2 mb-4 text-center lowercase text-violet-500"
                 />
                 <input
                   type="password"
                   onChange={(e) => setUser({ ...user, password: e.target.value })}
                   placeholder="Password"
-                  className="border p-2 mb-4"
+                    className="border p-2 mb-4 text-center lowercase text-violet-500"
                 />
                 <input
                   type="password"
                   onChange={(e) => setUser({ ...user, password2: e.target.value })}
                   placeholder="Confirm Password"
-                  className="border p-2 mb-4"
+                    className="border p-2 mb-4 text-center lowercase text-violet-500"
                 />
-                <button onClick={() => dispatch(registerAccount({ user, navigate }))} className="bg-purple-500 text-white text-2xl font-bold my-4 rounded-full py-2 px-4 w-80">
+                </div>
+                <button onClick={() => dispatch(registerAccount({ user, navigate }))}  className="bg-violet-400 w-56 uppercase text-white px-4 py-2 rounded font-bold hover:bg-violet-500">
                   Register
                 </button>
               </div>
-
-              <span>--</span>
-              <button className="text-purple-500"  onClick={logout}>Logout</button>
+              {/* <span className="text-white font-bold">or</span> */}
+            
             </>
           )}
         </>

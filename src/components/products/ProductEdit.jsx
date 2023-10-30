@@ -85,6 +85,7 @@ const ProductEdit = () => {
                 }
                 value={product.description}
               />
+              <input type="text" onChange={(e) => setProduct({...product, comment: e.target.value})} />
               <select
                 onChange={(e) =>
                   setProduct({ ...product, category: e.target.value })

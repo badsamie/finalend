@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PRODUCTS_API } from "../../helpers/consts";
 import { toggleCart } from "../cart/cartSlice";
+import { getAuthConfig } from "../../helpers/functions";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
@@ -219,3 +220,5 @@ export const getCategories = createAsyncThunk(
     return category;
   }
 );
+
+

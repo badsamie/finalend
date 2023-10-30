@@ -12,6 +12,8 @@ import Cart from "../components/cart/Cart";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import DomPage from "../pages/DomPage";
+import PayPage from "../pages/PayPage/PayPage"
+
 import Favorites from "../components/fav/Favorites";
 
 const MainRoutes = () => {
@@ -82,6 +84,11 @@ const MainRoutes = () => {
       path: "/favorites",
       element: <Favorites />,
     },
+    {
+      id: 13,
+      path: "/order",
+      element: <PayPage />
+    }
   ];
 
   return (
