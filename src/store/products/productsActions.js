@@ -69,16 +69,18 @@ export const createProduct = createAsyncThunk(
     }
   }
 );
+
 const getToken = () => {
   return JSON.parse(localStorage.getItem("tokens"));
 };
+
 export const addRating = createAsyncThunk(
   "products/addRating",
-  async ({ id, rating }, { dispatch }) => {
+  async ({ product }) => {
     try {
       const ratingData = new FormData();
-      ratingData.append("rating", rating);
-
+      ratingData.append("rating", product.rating);
+      await axios.post(`${PRODUCTS_API}/api/v1/apartment/rating/`, ratingData);
       const tokens = getToken();
       const config = {
         headers: {
@@ -94,7 +96,6 @@ export const addRating = createAsyncThunk(
     } catch (err) {
       console.log(err, "не добавляет");
     }
-    dispatch(getOneProduct({ id }));
   }
 );
 export const addLike = createAsyncThunk(
@@ -148,6 +149,7 @@ export const createImage = createAsyncThunk(
     }
   }
 );
+
 export const createComment = createAsyncThunk(
   "products/createComment",
   async ({ product, comment }, { dispatch }) => {
@@ -175,11 +177,12 @@ export const createComment = createAsyncThunk(
     }
   }
 );
+
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id, oneProduct }, { dispatch }) => {
     await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`).then(() => {
-      dispatch(toggleCart(oneProduct));
+      // dispatch(toggleCart(oneProduct));
       dispatch(getProducts());
     });
   }

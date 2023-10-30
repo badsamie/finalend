@@ -12,7 +12,7 @@ import Cart from "../components/cart/Cart";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import DomPage from "../pages/DomPage";
-
+import Favorites from "../components/fav/Favorites";
 
 const MainRoutes = () => {
   const ROUTES = [
@@ -58,11 +58,11 @@ const MainRoutes = () => {
       element: <Cart />,
     },
     {
-    id: 8,
-    path: "/quiz",
-    element: <Quiz/>
-  },
-      {
+      id: 8,
+      path: "/quiz",
+      element: <Quiz />,
+    },
+    {
       id: 9,
       path: "/chat",
       element: <Chat />,
@@ -70,12 +70,17 @@ const MainRoutes = () => {
     {
       id: 11,
       path: "/register",
-      element: <Register/>,
+      element: <Register />,
     },
     {
       id: 12,
       path: "/dompage",
-      element: <DomPage/>,
+      element: <DomPage />,
+    },
+    {
+      id: 13,
+      path: "/favorites",
+      element: <Favorites />,
     },
   ];
 
