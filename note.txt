@@ -1,0 +1,13 @@
+const handleLike = async (likedId) => {
+    const liked = await axios.post(`${API}/appartmnt/${likedId}/like`)
+    const oneProduct = await axios(`${API}/222`)
+    return {liked, oneProduct}
+}}
+
+
+
+build.addCase(handleLike.fullfield, (state, {payload})=>{
+const {liked, oneProduct} = payload
+    oneProduct.like = true
+})
+

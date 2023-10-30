@@ -1,16 +1,20 @@
 import React from "react";
-import "./App.css";
-import OrderForm from "./components/order/OrderForm";
-// import Translate from "./components/tranlate/Translate";
-// import { Price } from "./components/price/Price";
-
+// import MainRoutes from "./routing/MainRoutes";
+// import Navbar from "./components/ui/Navbar";
+// import HomePage from "./pages/HomePage";
+import Navbar from "./components/ui/Navbar";
+import HomePage from "./pages/HomePage";
+import MainRoutes from "./routing/MainRoutes";
 const App = () => {
   return (
-    <div>
-      {/* <Price /> */}
-      {/* <Translate /> */}
-      <OrderForm />
-    </div>
+    <>
+      <Navbar />
+      <HomePage />
+      <MainRoutes />
+      {/* <Navbar /> */}
+      {/* <MainRoutes /> */}
+      {/* <HomePage/> */}
+    </>
   );
 };
 
