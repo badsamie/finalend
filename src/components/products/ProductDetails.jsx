@@ -15,7 +15,6 @@ import {
 import ProductLike from "./ProductLike";
 import ProductComment from "./ProductComment";
 
-
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -55,6 +54,7 @@ const ProductDetails = () => {
   const handleDelete = () => {
     dispatch(deleteProduct({ id: oneProduct.id }));
     dispatch(removeFromCart(oneProduct.id));
+    dispatch(removeAllFromFav(oneProduct.id));
     navigate("/products");
   };
 

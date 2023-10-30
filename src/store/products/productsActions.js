@@ -51,7 +51,6 @@ export const getTotalPages = createAsyncThunk(
     return totalPages;
   }
 );
-
 export const getOneProduct = createAsyncThunk(
   "products/getOneProduct",
   async ({ id }) => {
@@ -79,7 +78,6 @@ export const createProduct = createAsyncThunk(
     }
   }
 );
-
 const getToken = () => {
   return JSON.parse(localStorage.getItem("tokens"));
 };
@@ -159,7 +157,6 @@ export const createImage = createAsyncThunk(
     }
   }
 );
-
 export const createComment = createAsyncThunk(
   "products/createComment",
   async ({ product, comment }, { dispatch }) => {
@@ -187,12 +184,11 @@ export const createComment = createAsyncThunk(
     }
   }
 );
-
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id, oneProduct }, { dispatch }) => {
     await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`).then(() => {
-      // dispatch(toggleCart(oneProduct));
+      dispatch(toggleCart(oneProduct));
       dispatch(getProducts());
     });
   }
