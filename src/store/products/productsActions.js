@@ -72,7 +72,6 @@ export const createProduct = createAsyncThunk(
 const getToken = () => {
   return JSON.parse(localStorage.getItem("tokens"));
 };
-
 export const addRating = createAsyncThunk(
   "products/addRating",
   async ({ id, rating }, { dispatch }) => {
@@ -81,7 +80,6 @@ export const addRating = createAsyncThunk(
       ratingData.append("rating", rating);
 
       const tokens = getToken();
-      console.log(tokens);
       const config = {
         headers: {
           Authorization: `Bearer ${tokens.access}`,
@@ -125,7 +123,6 @@ export const addLike = createAsyncThunk(
     dispatch(getOneProduct({ id }));
   }
 );
-
 export const createImage = createAsyncThunk(
   "products/createImage",
   async ({ product }, { dispatch }) => {
@@ -134,7 +131,7 @@ export const createImage = createAsyncThunk(
       imgData.append("post", product.id);
       console.log(product.image);
       imgData.append("image", product.image);
-      //
+
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -151,7 +148,60 @@ export const createImage = createAsyncThunk(
     }
   }
 );
+export const createComment = createAsyncThunk(
+  "products/createComment",
+  async ({ product, comment }, { dispatch }) => {
+    try {
+      const comData = new FormData();
+      comData.append("body", comment);
+      comData.append("apartment", product.id);
 
+      const tokens = getToken();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      };
+
+      await axios.post(
+        `${PRODUCTS_API}/api/v1/apartment/comments/`,
+        comData,
+        config
+      );
+
+      dispatch(getProducts());
+    } catch (error) {
+      console.log(error, "soska");
+    }
+  }
+);
+export const deleteComment = createAsyncThunk(
+  "products/createComment",
+  async ({ product, comment }, { dispatch }) => {
+    try {
+      const comData = new FormData();
+      comData.append("body", comment);
+      comData.append("apartment", product.id);
+
+      const tokens = getToken();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      };
+
+      await axios.delete(
+        `${PRODUCTS_API}/api/v1/apartment/comments/${product.id}`,
+        comData,
+        config
+      );
+
+      dispatch(getProducts());
+    } catch (error) {
+      console.log(error, "soska");
+    }
+  }
+);
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async ({ id, oneProduct }, { dispatch }) => {
@@ -161,7 +211,6 @@ export const deleteProduct = createAsyncThunk(
     });
   }
 );
-
 export const editProduct = createAsyncThunk(
   "products/editProduct",
   async ({ product }, { dispatch }) => {
