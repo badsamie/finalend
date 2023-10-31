@@ -6,7 +6,8 @@ import {
 } from "../../store/products/productsActions";
 import ProductItem from "./ProductItem";
 import ProductsPagination from "./ProductsPagination";
-import { Link } from "react-router-dom"; // Импортируем Link из react-router-dom
+import { Link, useNavigate } from "react-router-dom";
+import LoadingPage from "../../pages/LoadingPage";
 
 const ProductsList = () => {
   const { products, loading } = useSelector((state) => state.products);
@@ -20,16 +21,19 @@ const ProductsList = () => {
   return (
     <>
       {loading ? (
-        <h3>loading...</h3>
+        <LoadingPage />
       ) : (
-        <div className="flex flex-wrap ">
-          <ProductsPagination />
-          {products.map((product) => (
-            <Link key={product.id} to={`/details/${product.id}`}> 
-              <ProductItem product={product} />
-            </Link>
-          ))}
-        </div>
+        <>
+          <div className="flex flex-wrap mt-48">
+            <ProductsPagination />
+            {products.map((product) => (
+              <Link key={product.id} to={`/details/${product.id}`}>
+                <ProductItem product={product} />
+              </Link>
+              
+            ))}
+          </div>
+        </>
       )}
     </>
   );

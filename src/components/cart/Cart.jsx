@@ -1,9 +1,11 @@
+// В файле Cart.jsx
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeAllFromCart,
   removeFromCart,
   toggleCart,
+  createOrder, // Исправлена опечатка в имени
 } from "../../store/cart/cartSlice";
 import "./Cart.css";
 
@@ -35,7 +37,7 @@ const Cart = () => {
 
   if (cartItems.length === 0) {
     return (
-      <p className="text-center font-bold uppercase text-white text-3xl text-purple-500">
+      <p className="text-center font-bold uppercase text-3xl text-violet-500 mt-56">
         Cart is empty
       </p>
     );
@@ -97,6 +99,7 @@ const Cart = () => {
           Remove All from Cart
         </button>
         <button className="order-button">ORDER</button>
+
       </div>
     </div>
   );

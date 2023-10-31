@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearStatusState } from "../../store/account/accountSlice";
 import { loginAccount } from "../../store/account/accountActions";
+import LoadingPage from "../../pages/LoadingPage";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -22,7 +23,7 @@ const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
       {loading ? (
-        <div className="text-2xl">Loading...</div>
+<LoadingPage />
       ) : (
         <>
           {status ? (
@@ -36,30 +37,34 @@ const Login = () => {
               </button>
             </div>
           ) : (
-            <div className="text-center">
-              <h3 className="text-black text-2xl mb-4">Sig in</h3>
+            <div className=" w-2/6 -mt-64">
+              <h3 className="text-violet-400 text-center uppercase font-bold text-4xl mb-4">Sign in</h3>
+              <div className="flex flex-col w-full mt-12 mb-9">
               <input
                 type="text"
-                placeholder="Email или имя пользователя"
+                placeholder="Email "
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
-                className="border p-2 mb-4"
+                className="border p-2 mb-4 text-center lowercase text-violet-500"
               />
               <input
                 type="password"
-                placeholder="Пароль"
+                placeholder="password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
-                className="border p-2 mb-4"
+                className="border p-2 mb-4 rounded text-center lowercase text-violet-500"
               />
+              </div>
+             
               <div className="flex justify-between items-center mb-4">
+              <a href="/" className="text-violet-400 font-bold uppercase hover:text-violet-500 ">forgot?</a>
                 <button
                   onClick={() => dispatch(loginAccount({ user, navigate }))}
-                  className="bg-purple-500 text-white px-4 py-2 rounded-full"
+                  className="bg-violet-400 w-28 text-white px-4 py-2 rounded font-bold hover:bg-violet-500"
                 >
-                  Войти
+                 login
                 </button>
-                <a href="/">Забыли?</a>
+                <button onClick={() => navigate("/recForm")}>Забыли?</button>
+               
               </div>
-              <span>Или</span>
             </div>
           )}
         </>

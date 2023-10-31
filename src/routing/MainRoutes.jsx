@@ -12,21 +12,19 @@ import Cart from "../components/cart/Cart";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import DomPage from "../pages/DomPage";
+import RecoveryForm from "../components/account/ForgotPassword/RecoveryForm";
+import ResetPasswordPage from "../components/account/ForgotPassword/ResetPasswordPage";
+import PayPage from "../pages/PayPage/PayPage";
+
 import Favorites from "../components/fav/Favorites";
 
 const MainRoutes = () => {
   const ROUTES = [
     {
-      id: 111,
-      path: "/",
-      element: <HomePage />,
-    },
-    {
       id: 1,
       path: "/products",
       element: <ProductsPage />,
     },
-
     {
       id: 2,
       path: "/product-create",
@@ -81,6 +79,26 @@ const MainRoutes = () => {
       id: 13,
       path: "/favorites",
       element: <Favorites />,
+    },
+    {
+      id: 14,
+      path: "/order",
+      element: <PayPage />,
+    },
+    {
+      id: 15,
+      path: "/",
+      element: <HomePage />,
+    },
+    {
+      id: 16,
+      path: "/recForm",
+      element: <RecoveryForm />,
+    },
+    {
+      id: 17,
+      path: "/voctonovlenie",
+      element: <ResetPasswordPage />,
     },
   ];
 

@@ -1,9 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+const ORDERS_API = "your_orders_api_endpoint"; // Замените на реальный API endpoint
 
 const loadCartFromStorage = () => {
   const cartData = localStorage.getItem("cart");
   return cartData ? JSON.parse(cartData) : { items: [] };
 };
+
+export const createOrder = createAsyncThunk("cart/createOrder", async () => {
+  const cart = loadCartFromStorage();
+  if (!cart.items.length) return;
+  await axios.post(ORDERS_API, cart);
+  localStorage.removeItem("cart");
+});
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -27,7 +37,7 @@ export const cartSlice = createSlice({
     },
     removeAllFromCart: (state, action) => {
       state.items = [];
-      localStorage.setItem("cart", JSON.stringify(state));
+      localStorage.removeItem("cart");
     },
     removeFromCart: (state, action) => {
       const itemId = action.payload;
@@ -37,7 +47,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { toggleCart, removeAllFromCart, removeFromCart } =
-  cartSlice.actions;
+export const { toggleCart, removeAllFromCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
