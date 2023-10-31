@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
       {loading ? (
-<LoadingPage />
+        <LoadingPage />
       ) : (
         <>
           {status ? (
@@ -38,32 +38,39 @@ const Login = () => {
             </div>
           ) : (
             <div className=" w-2/6 -mt-64">
-              <h3 className="text-violet-400 text-center uppercase font-bold text-4xl mb-4">Sign in</h3>
+              <h3 className="text-violet-400 text-center uppercase font-bold text-4xl mb-4">
+                Sign in
+              </h3>
               <div className="flex flex-col w-full mt-12 mb-9">
-              <input
-                type="text"
-                placeholder="Email "
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
-                className="border p-2 mb-4 text-center lowercase text-violet-500"
-              />
-              <input
-                type="password"
-                placeholder="password"
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
-                className="border p-2 mb-4 rounded text-center lowercase text-violet-500"
-              />
+                <input
+                  type="text"
+                  placeholder="Email "
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  className="border p-2 mb-4 text-center lowercase text-violet-500"
+                />
+                <input
+                  type="password"
+                  placeholder="password"
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
+                  className="border p-2 mb-4 rounded text-center lowercase text-violet-500"
+                />
               </div>
-             
+
               <div className="flex justify-between items-center mb-4">
-              <a href="/" className="text-violet-400 font-bold uppercase hover:text-violet-500 ">forgot?</a>
+                <a
+                  onClick={() => navigate("/recForm")}
+                  className="text-violet-400 font-bold uppercase hover:text-violet-500 cursor-pointer "
+                >
+                  forgot?
+                </a>
                 <button
                   onClick={() => dispatch(loginAccount({ user, navigate }))}
                   className="bg-violet-400 w-28 text-white px-4 py-2 rounded font-bold hover:bg-violet-500"
                 >
-                 login
+                  login
                 </button>
-                <button onClick={() => navigate("/recForm")}>Забыли?</button>
-               
               </div>
             </div>
           )}

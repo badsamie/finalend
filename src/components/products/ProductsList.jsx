@@ -1,45 +1,3 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getProducts,
-//   getTotalPages,
-// } from "../../store/products/productsActions";
-// import ProductItem from "./ProductItem";
-// import ProductsPagination from "./ProductsPagination";
-// import { Link, useNavigate } from "react-router-dom";
-// import LoadingPage from "../../pages/LoadingPage";
-// import "./styles/List.css";
-// const ProductsList = () => {
-//   const { products, loading } = useSelector((state) => state.products);
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(getTotalPages());
-//     dispatch(getProducts());
-//   }, []);
-
-//   return (
-//     <>
-//       {loading ? (
-//         <LoadingPage />
-//       ) : (
-//         <>
-//           <div className=" list">
-//             <ProductsPagination />
-//             {products.map((product) => (
-//               <Link key={product.id} to={`/details/${product.id}`}>
-//                 <ProductItem product={product} />
-//               </Link>
-//             ))}
-//           </div>
-//         </>
-//       )}
-//     </>
-//   );
-// };
-
-// export default ProductsList;
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -51,7 +9,6 @@ import ProductsPagination from "./ProductsPagination";
 import { Link } from "react-router-dom";
 import LoadingPage from "../../pages/LoadingPage";
 import "./styles/List.css";
-import ProductsSearch from "./ProductsSearch";
 
 const ProductsList = () => {
   const { products, loading } = useSelector((state) => state.products);
@@ -78,15 +35,6 @@ const ProductsList = () => {
                 </Link>
               ))}
             </div>
-            <ProductsPagination />
-<<<<<<< HEAD
-            {products.map((product) => (
-              <Link key={product.id} to={`/details/${product.id}`}>
-                <ProductItem product={product} />
-              </Link>
-            ))}
-=======
->>>>>>> 162300521d5dfa2f25191e7c40757aa1d8e3fd47
           </div>
         </>
       )}
