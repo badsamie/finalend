@@ -18,8 +18,6 @@ const productSlice = createSlice({
     search: "",
     category: [],
     image: [],
-    priceRange: "",
-    rating: "",
   },
   reducers: {
     clearOneProductState: (state) => {
@@ -39,27 +37,6 @@ const productSlice = createSlice({
     setSearchVal: (state, action) => {
       state.search = action.payload.search;
       state.currentPage = 1;
-    },
-    setPriceRangeState: (state, action) => {
-      const { minPrice, maxPrice } = action.payload;
-      if (minPrice && maxPrice) {
-        state.priceRange = `&price_gte=${minPrice}&price_lte=${minPrice}`;
-      } else if (minPrice) {
-        state.priceRange = `&price_lte=${minPrice}`;
-      } else if (maxPrice) {
-        state.priceRange = `&price_lte=${maxPrice}`;
-      } else {
-        state.priceRange = "";
-      }
-    },
-    clearAllFilters: (state) => {
-      state.currentPage = 1;
-      state.currentCategory = "";
-      state.search = "";
-      state.priceRange = "";
-    },
-    ratingAdd: (state, action) => {
-      state.rating = action.payload;
     },
   },
   extraReducers: (builder) => {

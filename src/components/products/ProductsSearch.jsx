@@ -35,13 +35,14 @@ const ProductsSearch = () => {
   };
 
   return (
-    <>
+    <div className="mt-48">
       <input
         onChange={(e) => changeSearch(e.target.value)}
         type="text"
         value={searchValue}
         id="Search"
         placeholder="Search for..."
+        className="h-9 rounded "
       />
       <button
         onClick={() => {
@@ -51,7 +52,7 @@ const ProductsSearch = () => {
       >
         go
       </button>
-    </>
+    </div>
   );
 };
 

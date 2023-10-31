@@ -10,15 +10,29 @@ import {
 import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
 import { createOrder } from "../../store/cart/cartSlice"; // Import createOrder
+import { isUserLogin } from "../../helpers/functions";
+
+import ProductsRating from "./ProductsRating";
+import {
+  removeAllFromFav,
+  toggleFav,
+} from "../../store/favorite/favoriteslice";
+import ProductLike from "./ProductLike";
+import ProductComment from "./ProductComment";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [rating, setRating] = useState(""); // Changed 'reting' to 'rating'
-  const { loading, oneProduct } = useSelector((state) => state.products);
+ 
+  const { loading, oneProduct, rating } = useSelector(
+    (state) => state.products
+  );
+
   const { id } = useParams();
   const cartItems = useSelector((state) => state.cart.items) || [];
+  const favItems = useSelector((state) => state.fav.items) || [];
 
+  // console.log(oneProduct);
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
@@ -29,6 +43,7 @@ const ProductDetails = () => {
   }
 
   const isItemInCart = cartItems.some((item) => item.id === oneProduct.id);
+  const isItemInFav = favItems.some((items) => items.id === oneProduct.id);
 
   const handleCartAction = () => {
     if (isItemInCart) {
@@ -37,10 +52,18 @@ const ProductDetails = () => {
       dispatch(toggleCart(oneProduct));
     }
   };
+  const handleFavAction = () => {
+    if (isItemInFav) {
+      dispatch(removeAllFromFav(oneProduct.id));
+    } else {
+      dispatch(toggleFav(oneProduct));
+    }
+  };
 
   const handleDelete = () => {
     dispatch(deleteProduct({ id: oneProduct.id }));
     dispatch(removeFromCart(oneProduct.id));
+    dispatch(removeAllFromFav(oneProduct.id));
     navigate("/products");
   };
 
@@ -69,19 +92,78 @@ const ProductDetails = () => {
               <h3 className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
                 Title: {oneProduct.title}
               </h3>
-              {/* ... (rest of your code remains the same) */}
-              <input
-                type="number"
-                value={rating}
-                onChange={handleRatingChange}
-              />
-              <button onClick={handleAddRating}>Add Rating</button>
-              <button
-                className="cart-order-button font-light border"
-                onClick={handleOrder}
-              >
-                Order
-              </button>
+            
+              {oneProduct.images.length > 0 && (
+                <img
+                  className="w-36 h-56"
+                  src={oneProduct.images[0].image}
+                  alt=""
+                />
+              )}
+              <div className="text-gray-600">
+                <p>Location: {oneProduct.location}</p>
+                <p>Price: {oneProduct.price}</p>
+                <p className="inline-block rounded bg-purple-500 px-12 py-3 text-sm font-medium text-white transition">
+                  $: {oneProduct.price_dollar}
+                </p>
+                <p>Education: {oneProduct.education}</p>
+              </div>
+              <div className="mt-4 text-gray-600">
+                <p>Desc: {oneProduct.description}</p>
+                <p>count_views: {oneProduct.count_views}</p>
+                <p>Category: {oneProduct.category}</p>
+                <p>{oneProduct.updated_at}</p>
+                <p>Rating: {oneProduct.rating}</p>
+              </div>
+
+              <div className="mt-4">
+                <button
+                  onClick={() => {
+                    dispatch(addRating({}));
+                    dispatch(getProducts());
+                  }}
+                >
+                  Send
+                </button>
+                <p>Rating: {oneProduct ? oneProduct.rating : "Нет рейтинга"}</p>
+                <p>like:{oneProduct.like_count}</p>
+                <div>
+                  {oneProduct.comments.map((comment) => (
+                    <>
+                      <span>@{comment.owner}</span>
+                      <p>{comment.body}</p>
+                    </>
+                  ))}
+                </div>
+                <ProductComment product={oneProduct} />
+                <button
+                  onClick={() => navigate(`/edit/${oneProduct.id}`)}
+                  className="bg-blue-600"
+                >
+                  Edit
+                </button>
+                <button className="bg-red-700" onClick={handleDelete}>
+                  Delete
+                </button>
+                <span>----</span>
+                <button className="bg-red-700" onClick={handleCartAction}>
+                  {isItemInCart ? (
+                    <button className="bg-red-700">Remove from Cart</button>
+                  ) : (
+                    <button className="bg-blue-600">Add to Cart</button>
+                  )}
+                </button>
+                --
+                <button onClick={handleFavAction}>
+                  {!isItemInFav ? (
+                    <button className="bg-blue-600">add fav</button>
+                  ) : (
+                    <button className="bg-red-700">delete fav</button>
+                  )}
+                </button>
+                <ProductsRating />
+                <ProductLike />
+              </div>
             </div>
           )}
         </>

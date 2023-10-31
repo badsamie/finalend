@@ -20,6 +20,20 @@ const Cart = () => {
     dispatch(removeAllFromCart());
   };
 
+  const handleQuantityChange = (e, id) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    dispatch(toggleCart({ id, quantity: newQuantity }));
+  };
+
+  const { totalPrice, totalQuantity } = cartItems.reduce(
+    (acc, item) => {
+      acc.totalPrice += item.price * (item.quantity || 1);
+      acc.totalQuantity += item.quantity || 1;
+      return acc;
+    },
+    { totalPrice: 0, totalQuantity: 0 }
+  );
+
   if (cartItems.length === 0) {
     return (
       <p className="text-center font-bold uppercase text-white text-3xl text-purple-500">
@@ -49,27 +63,44 @@ const Cart = () => {
             </h3>
             <p className="text-purple-500 font-bold">Price: ${item.price}</p>
             <p className="text-purple-500 font-bold">Title: {item.title}</p>
-            <p className="text-purple-500 font-bold">Description: {item.description}</p>
+            <p className="text-purple-500 font-bold">
+              Description: {item.description}
+            </p>
             <p className="text-[12px] text-purple-500 font-bold">
               Location: {item.location}
             </p>
-            <p className="text-[12px] text-purple-500 font-bold">$: {item.price_dollar}</p>
+            <p className="text-[12px] text-purple-500 font-bold">
+              $: {item.price_dollar}
+            </p>
+            <p className="text-[12px] text-purple-500 font-bold">
+              Quantity: {item.quantity || 1}
+            </p>
+            <input
+              type="number"
+              placeholder="total"
+              value={item.quantity || 1}
+              onChange={(e) => handleQuantityChange(e, item.id)}
+            />
+            <button
+              className="bg-red-500 rounded-lg text-white p-2 hover:bg-red-700"
+              onClick={() => handleRemoveOneFromCart(item.id)}
+            >
+              Remove One
+            </button>
           </div>
         ))}
       </div>
-      {cartItems.length > 0 && (
-        <button
-          className="bg-purple-500 rounded-lg text-white p-2 hover:bg-pink-500"
-          onClick={() => handleRemoveAllFromCart()}
-        >
-          Remove All from Cart
-        </button>
-      )}
+      <p className="text-purple-500 font-bold">
+        Total Price: ${totalPrice.toFixed()}
+      </p>
+      <p className="text-purple-500 font-bold">
+        Total Quantity: {totalQuantity}
+      </p>
       <button
         className="bg-purple-500 rounded-lg text-white p-2 hover:bg-pink-500"
-        onClick={() => dispatch(createOrder())}
+        onClick={() => handleRemoveAllFromCart()}
       >
-        Create Order
+        Remove All from Cart
       </button>
     </div>
   );

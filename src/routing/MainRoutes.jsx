@@ -12,17 +12,14 @@ import Cart from "../components/cart/Cart";
 import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import DomPage from "../pages/DomPage";
-import PayPage from "../pages/PayPage";
 import RecoveryForm from "../components/account/ForgotPassword/RecoveryForm";
 import ResetPasswordPage from "../components/account/ForgotPassword/ResetPasswordPage";
+import PayPage from "../pages/PayPage/PayPage";
+
+import Favorites from "../components/fav/Favorites";
 
 const MainRoutes = () => {
   const ROUTES = [
-    {
-      id: 111,
-      path: "/",
-      element: <HomePage />,
-    },
     {
       id: 1,
       path: "/products",
@@ -61,7 +58,7 @@ const MainRoutes = () => {
     {
       id: 8,
       path: "/quiz",
-      element: <Quiz />
+
     },
     {
       id: 9,
@@ -80,8 +77,19 @@ const MainRoutes = () => {
     },
     {
       id: 13,
-      path: "/paypage",
+     
+      path: "/favorites",
+      element: <Favorites />,
+    },
+    {
+      id: 14,
+      path: "/order",
       element: <PayPage />,
+    },
+    {
+      id: 15,
+      path: "/",
+      element: <HomePage />,
     },
     {
       id: 14,
