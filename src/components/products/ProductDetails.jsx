@@ -9,6 +9,7 @@ import {
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
 import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
+import { createOrder } from "../../store/cart/cartSlice"; // Import createOrder
 import { isUserLogin } from "../../helpers/functions";
 
 import ProductsRating from "./ProductsRating";
@@ -23,6 +24,7 @@ import LoadingPage from "../../pages/LoadingPage";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { loading, oneProduct, rating } = useSelector(
     (state) => state.products
   );
@@ -77,6 +79,7 @@ const ProductDetails = () => {
               <h3 className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
                 Title: {oneProduct.title}
               </h3>
+
               {oneProduct.images.length > 0 && (
                 <img
                   className="w-36 h-56"

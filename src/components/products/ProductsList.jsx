@@ -11,7 +11,6 @@ import LoadingPage from "../../pages/LoadingPage";
 
 const ProductsList = () => {
   const { products, loading } = useSelector((state) => state.products);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {

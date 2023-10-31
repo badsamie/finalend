@@ -1,9 +1,11 @@
+// В файле Cart.jsx
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeAllFromCart,
   removeFromCart,
   toggleCart,
+  createOrder, // Исправлена опечатка в имени
 } from "../../store/cart/cartSlice";
 
 const Cart = () => {

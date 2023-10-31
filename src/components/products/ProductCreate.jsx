@@ -90,7 +90,7 @@ const ProductCreate = () => {
         className="w-full text-center py-3 rounded bg-blue-500 font-bold text-white hover:bg-pink-700"
         onClick={() => {
           dispatch(createProduct({ product }));
-          // dispatch(getProducts());
+          dispatch(getProducts());
           navigate("/products");
         }}
       >

@@ -62,6 +62,7 @@ const Login = () => {
                 >
                  login
                 </button>
+                <button onClick={() => navigate("/recForm")}>Забыли?</button>
                
               </div>
             </div>
