@@ -13,7 +13,8 @@ import RegisterPage from "../pages/RegisterPage";
 import HomePage from "../pages/HomePage";
 import DomPage from "../pages/DomPage";
 import PayPage from "../pages/PayPage";
-
+import RecoveryForm from "../components/account/ForgotPassword/RecoveryForm";
+import ResetPasswordPage from "../components/account/ForgotPassword/ResetPasswordPage";
 
 const MainRoutes = () => {
   const ROUTES = [
@@ -27,7 +28,6 @@ const MainRoutes = () => {
       path: "/products",
       element: <ProductsPage />,
     },
-
     {
       id: 2,
       path: "/product-create",
@@ -59,11 +59,11 @@ const MainRoutes = () => {
       element: <Cart />,
     },
     {
-    id: 8,
-    path: "/quiz",
-    element: <Quiz/>
-  },
-      {
+      id: 8,
+      path: "/quiz",
+      element: <Quiz />
+    },
+    {
       id: 9,
       path: "/chat",
       element: <Chat />,
@@ -71,18 +71,30 @@ const MainRoutes = () => {
     {
       id: 11,
       path: "/register",
-      element: <Register/>,
+      element: <Register />,
     },
     {
       id: 12,
       path: "/dompage",
-      element: <DomPage/>,
+      element: <DomPage />,
     },
     {
-      id: 12,
+      id: 13,
       path: "/paypage",
-      element: <PayPage/>,
+      element: <PayPage />,
     },
+    {
+      id: 14,
+      path: "/recForm",
+      element: <RecoveryForm />,
+    },
+    {
+      id: 15,
+      path: "/voctonovlenie",
+      element: <ResetPasswordPage />,
+    },
+    
+
   ];
 
   return (

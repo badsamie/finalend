@@ -57,7 +57,7 @@ const Login = () => {
                 >
                   Войти
                 </button>
-                <a href="/">Забыли?</a>
+                <button onClick={() => navigate("/recForm")}>Забыли?</button>
               </div>
               <span>Или</span>
             </div>
