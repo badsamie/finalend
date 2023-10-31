@@ -8,11 +8,12 @@ import {
   createOrder, // Исправлена опечатка в имени
 } from "../../store/cart/cartSlice";
 import "./Cart.css";
+import { Navigate, useNavigate } from "react-router";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items) || [];
-
+  const navigate = useNavigate();
   const handleRemoveOneFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
@@ -98,8 +99,9 @@ const Cart = () => {
         >
           Remove All from Cart
         </button>
-        <button className="order-button">ORDER</button>
-
+        <button className="order-button" onClick={() => navigate("/order")}>
+          ORDER
+        </button>
       </div>
     </div>
   );
