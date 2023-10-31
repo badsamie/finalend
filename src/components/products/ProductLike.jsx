@@ -8,19 +8,6 @@ const ProductLike = () => {
   const [like, setLike] = useState(0);
   const dispatch = useDispatch();
   const { id } = useParams();
-  //   const likePush = (event) => {
-  //     setLike(event.target.value);
-  //   };
-  //   const handleLikeSubmit = () => {
-  //     dispatch(addLike({ id, like }));
-  //     dispatch(getProducts())
-  //       .then((response) => {
-  //         console.log("Лайк успешно добавлен", response);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Ошибка при добавлении лайка", error);
-  //       });
-  //   };
   const handleLikeClick = () => {
     setLike(like + 1);
     dispatch(addLike({ id }, { like: like + 1 }))

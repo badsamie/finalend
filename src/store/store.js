@@ -1,4 +1,3 @@
-
 import { configureStore } from "@reduxjs/toolkit";
 import productsReducer from "./products/productsSlice";
 import accountSlice from "./account/accountSlice";
@@ -17,7 +16,7 @@ export default configureStore({
     account: accountSlice,
     cart: cartReducer,
     resetPassword: resetPasswordSlice,
-    passwordRecovery: passwordRecoverySlice
+    passwordRecovery: passwordRecoverySlice,
     fav: favoriteReducer,
   },
 });

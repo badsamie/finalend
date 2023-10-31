@@ -20,6 +20,7 @@ const ProductComment = ({ product }) => {
         className="bg-slate-200"
         onClick={() => {
           dispatch(createComment({ product, comment }));
+          setComment("");
         }}
       >
         com
