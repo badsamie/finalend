@@ -58,7 +58,7 @@ const MainRoutes = () => {
     {
       id: 8,
       path: "/quiz",
-
+      element: <Quiz />,
     },
     {
       id: 9,
@@ -77,7 +77,6 @@ const MainRoutes = () => {
     },
     {
       id: 13,
-     
       path: "/favorites",
       element: <Favorites />,
     },
@@ -92,17 +91,15 @@ const MainRoutes = () => {
       element: <HomePage />,
     },
     {
-      id: 14,
+      id: 16,
       path: "/recForm",
       element: <RecoveryForm />,
     },
     {
-      id: 15,
+      id: 17,
       path: "/voctonovlenie",
       element: <ResetPasswordPage />,
     },
-    
-
   ];
 
   return (

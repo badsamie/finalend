@@ -6,11 +6,10 @@ import {
 } from "../../store/products/productsActions";
 import ProductItem from "./ProductItem";
 import ProductsPagination from "./ProductsPagination";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ProductsList = () => {
   const { products, loading } = useSelector((state) => state.products);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -23,7 +23,7 @@ import ProductComment from "./ProductComment";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
- 
+
   const { loading, oneProduct, rating } = useSelector(
     (state) => state.products
   );
@@ -67,20 +67,6 @@ const ProductDetails = () => {
     navigate("/products");
   };
 
-  const handleRatingChange = (e) => {
-    setRating(e.target.value);
-  };
-
-  const handleAddRating = () => {
-    dispatch(addRating({ id: oneProduct.id, rating: rating }));
-    setRating(""); // Clear the rating input
-  };
-
-  const handleOrder = () => {
-    dispatch(createOrder());
-    navigate("/paypage");
-  };
-
   return (
     <>
       {loading ? (
@@ -92,7 +78,7 @@ const ProductDetails = () => {
               <h3 className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
                 Title: {oneProduct.title}
               </h3>
-            
+
               {oneProduct.images.length > 0 && (
                 <img
                   className="w-36 h-56"
