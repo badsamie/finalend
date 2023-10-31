@@ -15,6 +15,7 @@ const ProductComment = ({ product }) => {
         onChange={(e) => {
           setComment(e.target.value);
         }}
+        style={{ margin: "2% 0" }}
       />
       <button
         className="bg-slate-200"

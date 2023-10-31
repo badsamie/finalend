@@ -7,9 +7,9 @@ const ProductsPage = () => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-row justify-around">
-       <ProductsSearch />
+      <ProductsSearch />
+
       <ProductsList />
-     
     </div>
   );
 };

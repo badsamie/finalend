@@ -4,7 +4,7 @@ import { addRating, getProducts } from "../../store/products/productsActions";
 import { useParams } from "react-router-dom";
 
 const ProductsRating = () => {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState();
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -25,10 +25,20 @@ const ProductsRating = () => {
   return (
     <div>
       <label>
-        Рейтинг:
-        <input type="number" value={rating} onChange={handleRatingChange} />
+        <input
+          type="number"
+          value={rating}
+          onChange={handleRatingChange}
+          placeholder="Рейтинг:"
+        />
       </label>
-      <button onClick={handleRatingSubmit}>Отправить</button>
+      <button
+        onClick={handleRatingSubmit}
+        className="bg-slate-200"
+        style={{ width: "30px" }}
+      >
+        to
+      </button>
     </div>
   );
 };

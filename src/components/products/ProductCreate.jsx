@@ -28,7 +28,7 @@ const ProductCreate = () => {
 
   return (
     <div className="mx-auto w-1/4 flex flex-col justify-center items-center m-24">
-      <h3 className="mb-8 font-bold text-3xl text-center text-blue-500">
+      <h3 className="mb-8 font-bold text-3xl text-center text-purple-500">
         Create Product
       </h3>
       <input
@@ -79,7 +79,7 @@ const ProductCreate = () => {
       <select
         onChange={(e) => setProduct({ ...product, category: e.target.value })}
       >
-        <option>Choose category</option>
+        <option className="w-40 p-2 border border-purple-900 rounded-md">Choose category</option>
         {category.map((category) => (
           <option key={category} value={category}>
             {category}
@@ -87,7 +87,7 @@ const ProductCreate = () => {
         ))}
       </select>
       <button
-        className="w-full text-center py-3 rounded bg-blue-500 font-bold text-white hover:bg-pink-700"
+        className="w-full text-center py-3 rounded bg-purple-500 font-bold text-white hover:bg-purple-700"
         onClick={() => {
           dispatch(createProduct({ product }));
           dispatch(getProducts());
