@@ -18,11 +18,6 @@ import Favorites from "../components/fav/Favorites";
 
 const MainRoutes = () => {
   const ROUTES = [
-    // {
-    //   id: 111,
-    //   path: "/",
-    //   element: <HomePage />,
-    // },
     {
       id: 1,
       path: "/products",
@@ -85,9 +80,14 @@ const MainRoutes = () => {
       element: <Favorites />,
     },
     {
-      id: 13,
+      id: 14,
       path: "/order",
       element: <PayPage />,
+    },
+    {
+      id: 15,
+      path: "/",
+      element: <HomePage />,
     },
   ];
 
