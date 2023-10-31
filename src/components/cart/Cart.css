@@ -60,3 +60,7 @@ input {
 order-button:hover {
   background-color: red;
 }
+
+td {
+  color: blueviolet;
+}

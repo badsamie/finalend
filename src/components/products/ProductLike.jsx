@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addLike } from "../../store/products/productsActions";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 const ProductLike = () => {
   const [like, setLike] = useState(0);
   const dispatch = useDispatch();
@@ -23,6 +23,17 @@ const ProductLike = () => {
       <FavoriteIcon
         onClick={handleLikeClick}
         color={like > 0 ? "error" : "large"}
+        style={{
+          backgroundColor: "purple",
+          color: "white",
+          padding: "10px",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          width: "50px",
+          height: "50px",
+          marginRight: "9px",
+        }}
       />
     </div>
   );

@@ -25,7 +25,7 @@ const PayPage = () => {
             {/* <h1 className="uppercase text-center text-violet-500 text-2xl ">
               Order
             </h1> */}
-            <TextField
+            {/* <TextField
               margin="normal"
               size="small"
               required
@@ -40,7 +40,7 @@ const PayPage = () => {
               }}
               autoComplete="donate"
               autoFocus
-            />
+            /> */}
           </div>
 
           <div className="mt-9 mb-9">

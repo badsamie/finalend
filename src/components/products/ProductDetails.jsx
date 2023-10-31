@@ -10,6 +10,7 @@ import { removeFromCart, toggleCart } from "../../store/cart/cartSlice";
 import ProductsRating from "./ProductsRating";
 import {
   removeAllFromFav,
+  removeFromFav,
   toggleFav,
 } from "../../store/favorite/favoriteslice";
 import ProductLike from "./ProductLike";
@@ -59,6 +60,7 @@ const ProductDetails = () => {
   const handleDelete = () => {
     dispatch(deleteProduct({ id: oneProduct.id }));
     dispatch(removeFromCart(oneProduct.id));
+    dispatch(removeFromFav(oneProduct.id));
     navigate("/products");
   };
 
@@ -78,28 +80,34 @@ const ProductDetails = () => {
                   alt=""
                 />
               )}
-              <div className="product-info">
-                <p>Location: {oneProduct.location}</p>
-                <p>Price: {oneProduct.price}</p>
-                <p className="price-in-dollars">$: {oneProduct.price_dollar}</p>
-                <p>Education: {oneProduct.education}</p>
-              </div>
-              <div className="product-description">
-                <p>Description: {oneProduct.description}</p>
-                <p>Views: {oneProduct.count_views}</p>
-                <p>Category: {oneProduct.category}</p>
-                <p>Last Updated: {oneProduct.updated_at}</p>
-                <p>Rating: {oneProduct ? oneProduct.rating : "No rating"}</p>
-                <p>Likes: {oneProduct.like_count}</p>
-                <div className="comments-section">
-                  {oneProduct.comments.map((comment) => (
-                    <div key={comment.id} className="comment">
-                      <span className="comment-owner">@{comment.owner}</span>
-                      <p className="comment-body">{comment.body}</p>
-                    </div>
-                  ))}
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <div className="product-info">
+                  <p>Location: {oneProduct.location}</p>
+                  <p>Price: {oneProduct.price}</p>
+
+                  <p>Education: {oneProduct.education}</p>
+                  <p>Description: {oneProduct.description}</p>
+                  <p>Views: {oneProduct.count_views}</p>
                 </div>
-                <ProductComment product={oneProduct} />
+                <div className="product-description">
+                  <p>Category: {oneProduct.category}</p>
+                  <p>Last Updated: {oneProduct.updated_at}</p>
+                  <p>Rating: {oneProduct ? oneProduct.rating : "No rating"}</p>
+                  <p>Likes: {oneProduct.like_count}</p>
+                  <div className="comments-section">
+                    {oneProduct.comments.map((comment) => (
+                      <div key={comment.id} className="comment">
+                        <span className="comment-owner">@{comment.owner}</span>
+                        <p className="comment-body">{comment.body}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <ProductLike />
+
                 <button
                   onClick={() => navigate(`/edit/${oneProduct.id}`)}
                   className="edit-button"
@@ -119,8 +127,12 @@ const ProductDetails = () => {
                 <button className="fav-button" onClick={handleFavAction}>
                   {!isItemInFav ? <BookmarkBorderIcon /> : <BookmarkIcon />}
                 </button>
+                <p className="price-in-dollars">$: {oneProduct.price_dollar}</p>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <ProductComment product={oneProduct} />
+
                 <ProductsRating />
-                <ProductLike />
               </div>
             </div>
           )}
