@@ -6,7 +6,7 @@ import {
 } from "../../store/products/productsActions";
 import ProductItem from "./ProductItem";
 import ProductsPagination from "./ProductsPagination";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoadingPage from "../../pages/LoadingPage";
 
 const ProductsList = () => {
@@ -30,7 +30,6 @@ const ProductsList = () => {
               <Link key={product.id} to={`/details/${product.id}`}>
                 <ProductItem product={product} />
               </Link>
-              
             ))}
           </div>
         </>
