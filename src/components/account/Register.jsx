@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { registerAccount } from "../../store/account/accountActions";
 import { clearStatusState } from "../../store/account/accountSlice";
 import { logout } from "../../helpers/functions";
+import LoadingPage from "../../pages/LoadingPage";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Register = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       {loading ? (
-        <div>Loading...</div>
+       <LoadingPage />
       ) : (
         <>
           {status ? (

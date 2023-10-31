@@ -18,6 +18,7 @@ import {
 } from "../../store/favorite/favoriteslice";
 import ProductLike from "./ProductLike";
 import ProductComment from "./ProductComment";
+import LoadingPage from "../../pages/LoadingPage";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const ProductDetails = () => {
   }, [dispatch, id]);
 
   if (!oneProduct) {
-    return <p>Loading...</p>;
+    return <LoadingPage />
   }
 
   const isItemInCart = cartItems.some((item) => item.id === oneProduct.id);
@@ -68,7 +69,7 @@ const ProductDetails = () => {
   return (
     <>
       {loading ? (
-        <h3>loading....</h3>
+        <LoadingPage />
       ) : (
         <>
           {oneProduct && (

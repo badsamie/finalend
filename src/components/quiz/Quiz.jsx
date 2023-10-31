@@ -121,7 +121,7 @@ function Result({ correct }) {
 
 function ProgressBar({ percentage }) {
   return (
-    <div className="w-full bg-gray-200 rounded-full mb-4 overflow-hidden">
+    <div className="w-full bg-gray-100 rounded-full mb-4 overflow-hidden">
       <div
         style={{ width: `${percentage}%` }}
         className="h-4 bg-violet-400 transition-all duration-500"
@@ -214,7 +214,7 @@ const Quiz = () => {
   };
 
   return (
-    <div className="App min-h-screen bg-blue-50 flex items-center justify-center p-4">
+    <div className="App min-h-screen flex items-center justify-center p-4">
       {lives > 0 && step !== questions.length ? (
         <div className="flex flex-col items-center space-y-4 w-9/12">
           <Game

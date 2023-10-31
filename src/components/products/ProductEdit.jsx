@@ -9,6 +9,7 @@ import {
   getOneProduct,
 } from "../../store/products/productsActions";
 import { clearOneProductState } from "../../store/products/productsSlice";
+import LoadingPage from "../../pages/LoadingPage";
 
 const ProductEdit = () => {
   const { loading, oneProduct, category } = useSelector(
@@ -32,7 +33,7 @@ const ProductEdit = () => {
   return (
     <>
       {loading ? (
-        <h3>loading....</h3>
+        <LoadingPage />
       ) : (
         <>
           {product && (

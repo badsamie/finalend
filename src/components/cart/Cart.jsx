@@ -34,7 +34,7 @@ const Cart = () => {
 
   if (cartItems.length === 0) {
     return (
-      <p className="text-center font-bold uppercase text-white text-3xl text-purple-500">
+      <p className="text-center font-bold uppercase text-3xl text-violet-500 mt-56">
         Cart is empty
       </p>
     );
@@ -42,7 +42,7 @@ const Cart = () => {
 
   return (
     <div className="mx-auto max-w-screen-lg px-4 py-4 sm:px-6 sm:py-6 lg:px-8 text-center space-y-2">
-      <h2 className="text-xl font-bold text-purple-500 sm:text-3xl uppercas text-purple-700">
+      <h2 className="text-xl font-bold text-violet-500 sm:text-3xl uppercas ">
         Your Cart
       </h2>
       <div className="flex flex-wrap justify-center gap-4">
