@@ -5,6 +5,7 @@ import {
   removeFromCart,
   toggleCart,
 } from "../../store/cart/cartSlice";
+import "./Cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -41,65 +42,62 @@ const Cart = () => {
   }
 
   return (
-    <div className="mx-auto max-w-screen-lg px-4 py-4 sm:px-6 sm:py-6 lg:px-8 text-center space-y-2">
-      <h2 className="text-xl font-bold text-purple-500 sm:text-3xl uppercas text-purple-700">
-        Your Cart
-      </h2>
-      <div className="flex flex-wrap justify-center gap-4">
-        {cartItems.map((item) => (
-          <div
-            className="flex flex-col items-center gap-4"
-            key={item.id}
-            style={{
-              border: "1px solid #ccc",
-              padding: "10px",
-              minWidth: "200px",
-            }}
-          >
-            <h3 className="text-purple-500 uppercase font-bold hover:text-pink-700">
-              {item.title}
-            </h3>
-            <p className="text-purple-500 font-bold">Price: ${item.price}</p>
-            <p className="text-purple-500 font-bold">Title: {item.title}</p>
-            <p className="text-purple-500 font-bold">
-              Description: {item.description}
-            </p>
-            <p className="text-[12px] text-purple-500 font-bold">
-              Location: {item.location}
-            </p>
-            <p className="text-[12px] text-purple-500 font-bold">
-              $: {item.price_dollar}
-            </p>
-            <p className="text-[12px] text-purple-500 font-bold">
-              Quantity: {item.quantity || 1}
-            </p>
-            <input
-              type="number"
-              placeholder="total"
-              value={item.quantity || 1}
-              onChange={(e) => handleQuantityChange(e, item.id)}
-            />
-            <button
-              className="bg-red-500 rounded-lg text-white p-2 hover:bg-red-700"
-              onClick={() => handleRemoveOneFromCart(item.id)}
-            >
-              Remove One
-            </button>
-          </div>
-        ))}
+    <div className="cart-container">
+      <h2 className="cart-title">Your Cart</h2>
+      <table className="cart-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>ID</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>$</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((item) => (
+            <tr key={item.id}>
+              <td>{item.title}</td>
+              <td>{item.id}</td>
+              <td>${item.price}</td>
+              <td>{item.description}</td>
+              <td>{item.location}</td>
+              <td>${item.price_dollar}</td>
+              <td>
+                <input
+                  type="number"
+                  value={item.quantity || 1}
+                  onChange={(e) => handleQuantityChange(e, item.id)}
+                />
+              </td>
+              <td>${(item.price * (item.quantity || 1)).toFixed()}</td>
+              <td>
+                <button
+                  className="delete-button"
+                  onClick={() => handleRemoveOneFromCart(item.id)}
+                >
+                  DELETE
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="total-price">Total Price: ${totalPrice.toFixed()}</p>
+      <p className="total-quantity">Total Quantity: {totalQuantity}</p>
+      <div className="cart-buttons">
+        <button
+          className="remove-all-button"
+          onClick={() => handleRemoveAllFromCart()}
+        >
+          Remove All from Cart
+        </button>
+        <button className="order-button">ORDER</button>
       </div>
-      <p className="text-purple-500 font-bold">
-        Total Price: ${totalPrice.toFixed()}
-      </p>
-      <p className="text-purple-500 font-bold">
-        Total Quantity: {totalQuantity}
-      </p>
-      <button
-        className="bg-purple-500 rounded-lg text-white p-2 hover:bg-pink-500"
-        onClick={() => handleRemoveAllFromCart()}
-      >
-        Remove All from Cart
-      </button>
     </div>
   );
 };

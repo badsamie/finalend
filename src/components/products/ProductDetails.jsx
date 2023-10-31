@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -14,8 +14,11 @@ import {
 } from "../../store/favorite/favoriteslice";
 import ProductLike from "./ProductLike";
 import ProductComment from "./ProductComment";
-
-
+import "./styles/Details.css";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,7 +27,6 @@ const ProductDetails = () => {
   const cartItems = useSelector((state) => state.cart.items) || [];
   const favItems = useSelector((state) => state.fav.items) || [];
 
-  // console.log(oneProduct);
   useEffect(() => {
     dispatch(getOneProduct({ id }));
     return () => dispatch(clearOneProductState());
@@ -44,6 +46,7 @@ const ProductDetails = () => {
       dispatch(toggleCart(oneProduct));
     }
   };
+
   const handleFavAction = () => {
     if (isItemInFav) {
       dispatch(removeAllFromFav(oneProduct.id));
@@ -61,61 +64,59 @@ const ProductDetails = () => {
   return (
     <>
       {loading ? (
-        <h3>loading....</h3>
+        <h3>Loading....</h3>
       ) : (
         <>
           {oneProduct && (
-            <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
-              <h3 className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-                Title: {oneProduct.title}
-              </h3>
+            <div className="product-details-container">
+              <h3 className="product-title">{oneProduct.title}</h3>
               {oneProduct.images.length > 0 && (
                 <img
-                  className="w-36 h-56"
+                  className="product-image"
                   src={oneProduct.images[0].image}
                   alt=""
                 />
               )}
-              <div className="text-gray-600">
+              <div className="product-info">
                 <p>Location: {oneProduct.location}</p>
                 <p>Price: {oneProduct.price}</p>
-                <p className="inline-block rounded bg-purple-500 px-12 py-3 text-sm font-medium text-white transition bg-indigo-700">
-                  $: {oneProduct.price_dollar}
-                </p>
+                <p className="price-in-dollars">$: {oneProduct.price_dollar}</p>
                 <p>Education: {oneProduct.education}</p>
               </div>
-              <div className="mt-4 text-gray-600">
-                <p>Desc: {oneProduct.description}</p>
-                <p>count_views: {oneProduct.count_views}</p>
+              <div className="product-description">
+                <p>Description: {oneProduct.description}</p>
+                <p>Views: {oneProduct.count_views}</p>
                 <p>Category: {oneProduct.category}</p>
-                <p>{oneProduct.updated_at}</p>
-                <p>Rating: {oneProduct ? oneProduct.rating : "Нет рейтинга"}</p>
-                <p>like:{oneProduct.like_count}</p>
-                <div>
+                <p>Last Updated: {oneProduct.updated_at}</p>
+                <p>Rating: {oneProduct ? oneProduct.rating : "No rating"}</p>
+                <p>Likes: {oneProduct.like_count}</p>
+                <div className="comments-section">
                   {oneProduct.comments.map((comment) => (
-                    <>
-                      <span>@{comment.owner}</span>
-                      <p>{comment.body}</p>
-                    </>
+                    <div key={comment.id} className="comment">
+                      <span className="comment-owner">@{comment.owner}</span>
+                      <p className="comment-body">{comment.body}</p>
+                    </div>
                   ))}
                 </div>
                 <ProductComment product={oneProduct} />
                 <button
                   onClick={() => navigate(`/edit/${oneProduct.id}`)}
-                  className="bg-blue-600"
+                  className="edit-button"
                 >
                   Edit
                 </button>
-                <button className="bg-red-700" onClick={handleDelete}>
+                <button className="delete-button" onClick={handleDelete}>
                   Delete
                 </button>
-                <span>----</span>
-                <button className="bg-red-700" onClick={handleCartAction}>
-                  {isItemInCart ? "Remove from Cart" : "Add to Cart"}
+                <button className="cart-button" onClick={handleCartAction}>
+                  {isItemInCart ? (
+                    <ShoppingCartIcon />
+                  ) : (
+                    <RemoveShoppingCartIcon />
+                  )}
                 </button>
-                --
-                <button onClick={handleFavAction}>
-                  {!isItemInFav ? "add fav" : "delete fav"}
+                <button className="fav-button" onClick={handleFavAction}>
+                  {!isItemInFav ? <BookmarkBorderIcon /> : <BookmarkIcon />}
                 </button>
                 <ProductsRating />
                 <ProductLike />

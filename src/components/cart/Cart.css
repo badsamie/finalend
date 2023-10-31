@@ -1,0 +1,62 @@
+input {
+  text-align: center;
+  border: none;
+}
+
+.cart-container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.cart-title {
+  text-align: center;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.total-price,
+.total-quantity {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.cart-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+.order-button {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button,
+.remove-all-button {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover,
+.remove-all-button:hover,
+order-button:hover {
+  background-color: red;
+}
