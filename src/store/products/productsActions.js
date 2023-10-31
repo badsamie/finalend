@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PRODUCTS_API } from "../../helpers/consts";
 import { toggleCart } from "../cart/cartSlice";
+import { toggleFav } from "../favorite/favoriteslice";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
@@ -96,7 +97,7 @@ export const addRating = createAsyncThunk(
       };
 
       await axios.post(
-        `${PRODUCTS_API}/api/v1/apartment/${product.id}/rating/`,
+        `${PRODUCTS_API}/api/v1/apartment/${id}/rating/`,
         ratingData,
         config
       );
@@ -189,6 +190,7 @@ export const deleteProduct = createAsyncThunk(
   async ({ id, oneProduct }, { dispatch }) => {
     await axios.delete(`${PRODUCTS_API}/api/v1/apartment/${id}/`).then(() => {
       dispatch(toggleCart(oneProduct));
+      dispatch(toggleFav(oneProduct.id));
       dispatch(getProducts());
     });
   }
