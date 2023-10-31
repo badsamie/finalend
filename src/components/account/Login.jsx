@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearStatusState } from "../../store/account/accountSlice";
 import { loginAccount } from "../../store/account/accountActions";
+import LoadingPage from "../../pages/LoadingPage";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -22,7 +23,7 @@ const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
       {loading ? (
-        <div className="text-2xl">Loading...</div>
+<LoadingPage />
       ) : (
         <>
           {status ? (
