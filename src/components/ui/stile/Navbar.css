@@ -1,0 +1,52 @@
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menuItem1,
+.menuItem2,
+.menuItem3,
+.menuItem4,
+.menuItem5,
+.menuItem6,
+.menuItem7,
+.logoButton {
+  color: #fff;
+  cursor: pointer;
+  height: 40px;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+.menuItem1 {
+  background-color: #2ecc71;
+}
+.menuItem2 {
+  background-color: #e74c3c;
+}
+
+.menuItem3 {
+  background-color: #2ecc71;
+}
+.menuItem4 {
+  background-color: #2ecc71;
+}
+.menuItem5 {
+  background-color: #2ecc71;
+}
+.menuItem6 {
+  background-color: #2ecc71;
+}
+.menuItem7 {
+  background-color: #2ecc71;
+}
+
+.logoButton {
+  background-color: #34495e;
+}
+
+.perehodim {
+  margin-top: 4%;
+  display: flex;
+}

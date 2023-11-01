@@ -22,25 +22,9 @@ const PayPage = () => {
       <Container maxWidth="xs">
         <Box>
           <div className="-mt-24">
-            {/* <h1 className="uppercase text-center text-violet-500 text-2xl ">
+            <h1 className="uppercase text-center text-violet-500 text-2xl ">
               Order
-            </h1> */}
-            {/* <TextField
-              margin="normal"
-              size="small"
-              required
-              fullWidth
-              id="donate"
-              type="number"
-              label="How much you want order ?"
-              name="donate"
-              value={donate}
-              onChange={(e) => {
-                setDonate(e.target.value);
-              }}
-              autoComplete="donate"
-              autoFocus
-            /> */}
+            </h1>
           </div>
 
           <div className="mt-9 mb-9">

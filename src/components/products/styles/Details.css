@@ -89,8 +89,7 @@
 }
 
 .product-info,
-.product-description,
-.comments-section {
+.product-description {
   margin-bottom: 20px;
 }
 
@@ -103,8 +102,13 @@
   font-size: 16px;
 }
 
+.comments-section {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .comment {
-  margin-bottom: 15px;
+  margin: 4% 0;
 }
 
 .comment-owner {
