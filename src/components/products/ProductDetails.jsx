@@ -94,14 +94,6 @@ const ProductDetails = () => {
                   <p>Last Updated: {oneProduct.updated_at}</p>
                   <p>Rating: {oneProduct ? oneProduct.rating : "No rating"}</p>
                   <p>Likes: {oneProduct.like_count}</p>
-                  <div className="comments-section">
-                    {oneProduct.comments.map((comment) => (
-                      <div key={comment.id} className="comment">
-                        <span className="comment-owner">@{comment.owner}</span>
-                        <p className="comment-body">{comment.body}</p>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
 
@@ -133,6 +125,14 @@ const ProductDetails = () => {
                 <ProductComment product={oneProduct} />
 
                 <ProductsRating />
+              </div>
+              <div className="comments-section">
+                {oneProduct.comments.map((comment) => (
+                  <div key={comment.id} className="comment">
+                    <span className="comment-owner">@{comment.owner}</span>
+                    <p className="comment-body">{comment.body}</p>
+                  </div>
+                ))}
               </div>
             </div>
           )}

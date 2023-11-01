@@ -9,6 +9,7 @@ import ProductsPagination from "./ProductsPagination";
 import { Link } from "react-router-dom";
 import LoadingPage from "../../pages/LoadingPage";
 import "./styles/List.css";
+import ProductsSearch from "./ProductsSearch";
 
 const ProductsList = () => {
   const { products, loading } = useSelector((state) => state.products);
@@ -26,7 +27,10 @@ const ProductsList = () => {
       ) : (
         <>
           <div className="list-container">
-            <ProductsPagination />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <ProductsPagination />
+              <ProductsSearch />
+            </div>
 
             <div className="list">
               {products.map((product) => (

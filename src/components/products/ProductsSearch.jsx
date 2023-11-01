@@ -35,7 +35,7 @@ const ProductsSearch = () => {
   };
 
   return (
-    <div className="mt-48">
+    <div>
       <input
         onChange={(e) => changeSearch(e.target.value)}
         type="text"
@@ -48,6 +48,13 @@ const ProductsSearch = () => {
         onClick={() => {
           dispatch(setSearchVal({ search: searchValue }));
           dispatch(getProducts());
+        }}
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          width: "25px",
+          height: "33px",
+          borderRadius: "0 7px 7px 0",
         }}
       >
         go
