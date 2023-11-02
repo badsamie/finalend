@@ -1,13 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import planet from "./images/planet-duo-removebg-preview.png";
 import planet2 from "./images/violet-planet-removebg-preview.png";
 import kaban from "./images/photo_2023-10-31_16.43.40-removebg-preview.png";
-import Footer from "../components/ui/Footer";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import CountrySlider from "./CountrySlider";
+
+
 
 const HomePage = () => {
   const navigate = useNavigate();
