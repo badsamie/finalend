@@ -104,9 +104,8 @@ const MainRoutes = () => {
     {
       id: 18,
       path: "/slider",
-      element: <CountrySlider/>,
+      element: <CountrySlider />,
     },
-    
   ];
 
   return (
