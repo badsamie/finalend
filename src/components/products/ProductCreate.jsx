@@ -28,7 +28,7 @@ const ProductCreate = () => {
 
   return (
     <div className="mx-auto w-1/4 flex flex-col justify-center items-center m-24">
-      <h3 className="mb-8 font-bold text-3xl text-center text-purple-500">
+      <h3 className="mb-8 font-bold text-3xl text-center text-violet-500 uppercase">
         Create Product
       </h3>
       <input

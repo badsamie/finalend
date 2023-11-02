@@ -6,6 +6,8 @@ body {
     background-image: url('https://img.freepik.com/premium-photo/delicate-purple-abstract-watercolor-background_667461-776.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: fixed;
+    background-attachment: fixed;
+    background-position: center;
+    
     
 }

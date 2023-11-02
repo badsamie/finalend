@@ -17,6 +17,7 @@ import ResetPasswordPage from "../components/account/ForgotPassword/ResetPasswor
 import PayPage from "../pages/PayPage/PayPage";
 
 import Favorites from "../components/fav/Favorites";
+import CountrySlider from "../pages/CountrySlider";
 
 const MainRoutes = () => {
   const ROUTES = [
@@ -100,6 +101,12 @@ const MainRoutes = () => {
       path: "/voctonovlenie",
       element: <ResetPasswordPage />,
     },
+    {
+      id: 18,
+      path: "/slider",
+      element: <CountrySlider/>,
+    },
+    
   ];
 
   return (
