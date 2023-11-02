@@ -17,10 +17,17 @@ import ResetPasswordPage from "../components/account/ForgotPassword/ResetPasswor
 import PayPage from "../pages/PayPage/PayPage";
 
 import Favorites from "../components/fav/Favorites";
+import PageNotFound from "../pages/NotFound";
+import Translate from "../pages/translate/Translate";
 import CountrySlider from "../pages/CountrySlider";
 
 const MainRoutes = () => {
   const ROUTES = [
+    {
+      id: 0,
+      path: "*",
+      element: <PageNotFound />,
+    },
     {
       id: 1,
       path: "/products",
@@ -103,9 +110,18 @@ const MainRoutes = () => {
     },
     {
       id: 18,
+      path: "/translate"
+      element: <Translate />,
+    },{
+      id:19,
       path: "/slider",
       element: <CountrySlider />,
     },
+      
+   
+      
+   
+    
   ];
 
   return (
