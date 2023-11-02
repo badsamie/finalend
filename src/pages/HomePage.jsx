@@ -1,20 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import planet from "./images/planet-duo-removebg-preview.png";
+// import planet from "./images/planet-duo-removebg-preview.png";
 import planet2 from "./images/violet-planet-removebg-preview.png";
 import kaban from "./images/photo_2023-10-31_16.43.40-removebg-preview.png";
-import Footer from "../components/ui/Footer";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import CountrySlider from "./CountrySlider";
-
+// import Footer from "../components/ui/Footer";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import CountrySlider from "./CountrySlider";
 
 const HomePage = () => {
   const navigate = useNavigate();
   return (
     <div>
- 
       <div className="flex h-screen items-center -mt-36">
         <div className="flex-1 flex justify-center">
           <img src={planet2} alt="planet-polyglot" />
@@ -40,34 +38,32 @@ const HomePage = () => {
         </div>
       </div>
 
-
-     <div className="bg-white p-10 mb-24">
+      <div className="bg-white p-10 mb-24">
         <div className="container mx-auto flex ">
-        <img src={kaban} alt="" className="w-64 h-64" />
-        <div className="flex flex-col ml-12 mt-20">
-        <h2 className="text-3xl font-semibold text-violet-500 uppercase mb-5">
-                Ресурс № 1 для изучения иностранных языков
-              </h2>
-              <p className="text-gray-600  ">
-              Учиться с Polyglot весело и интересно. Зарабатывайте очки за правильные ответы, открывайте 
-              <br/>
-              новые материалы и развивайте навыки разговорной речи. Наши короткие уроки действительно 
-              <br/>
+          <img src={kaban} alt="" className="w-64 h-64" />
+          <div className="flex flex-col ml-12 mt-20">
+            <h2 className="text-3xl font-semibold text-violet-500 uppercase mb-5">
+              Ресурс № 1 для изучения иностранных языков
+            </h2>
+            <p className="text-gray-600  ">
+              Учиться с Polyglot весело и интересно. Зарабатывайте очки за
+              правильные ответы, открывайте
+              <br />
+              новые материалы и развивайте навыки разговорной речи. Наши
+              короткие уроки действительно
+              <br />
               работают, и мы можем это доказать.
-              </p>
-        </div>
-       
+            </p>
+          </div>
         </div>
       </div>
 
-     
       <div>
         <div className="container mx-auto mt-64">
           <div className="text-center mb-12">
             <h2 className="text-3xl  font-semibold text-violet-500 uppercase">
               Учиться с Polyglot весело и интересно
             </h2>
-            
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -88,7 +84,9 @@ const HomePage = () => {
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-semibold mb-2 text-violet-500">Стимул к учёбе</h3>
+              <h3 className="text-2xl font-semibold mb-2 text-violet-500">
+                Стимул к учёбе
+              </h3>
               <p className="text-gray-600">
                 С нашим игровым подходом ежедневные занятия входят в привычку.
                 Вам помогут забавные задания и напоминания от нашего талисмана —
@@ -101,7 +99,7 @@ const HomePage = () => {
               </p>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <div>
               <h3 className="text-2xl font-semibold mb-2 text-violet-500">
@@ -125,7 +123,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

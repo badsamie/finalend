@@ -110,18 +110,14 @@ const MainRoutes = () => {
     },
     {
       id: 18,
-      path: "/translate"
+      path: "/translate",
       element: <Translate />,
-    },{
-      id:19,
+    },
+    {
+      id: 19,
       path: "/slider",
-      element: <CountrySlider/>,
-      
-    }
-   
-      
-   
-    
+      element: <CountrySlider />,
+    },
   ];
 
   return (
