@@ -115,9 +115,9 @@ const MainRoutes = () => {
     },{
       id:19,
       path: "/slider",
-      element: <CountrySlider/>,
+      element: <CountrySlider />,
+    },
       
-    }
    
       
    
