@@ -184,10 +184,10 @@ const Quiz = () => {
       );
       setLives(lives - 1);
     }
-  
+
     setTimeout(() => {
       setMessage(null);
-      setStep(prevStep => prevStep + 1);
+      setStep((prevStep) => prevStep + 1);
     }, 1000);
   };
 
@@ -250,7 +250,7 @@ const Quiz = () => {
       )}
 
       <div
-        className={`absolute bottom-0 left-0 right-0 p-4  text-white text-center transform transition-transform duration-300 ${
+        className={`absolute bottom-4 left-0 right-0 p-4 w-64  text-white text-center transform transition-transform duration-300 ${
           message
             ? isCorrect
               ? "bg-green-300 translate-y-0"

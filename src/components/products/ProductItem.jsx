@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 const ProductItem = ({ product }) => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-wrap ">
-      <div className=" ml-1 rounded-xl border-purple-400 border w-full p-2">
+    <div className="flex  justify-center ">
+      <div className=" ml-1 rounded-xl bg-white border w-96  p-2">
+        <img src={product.image} className="w-56 z-auto h-36" alt="" />
         <h3
-          className="cursor-pointer text-lg font-semibold mb-2"
+          className="cursor-pointer text-violet-600 uppercase text-lg font-semibold mb-2"
           onClick={() => navigate(`/details/${product.id}`)}
         >
           {product.title}

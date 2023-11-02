@@ -38,11 +38,11 @@ const ProductEdit = () => {
         <>
           {product && (
             <div className="mx-auto w-1/4 flex flex-col justify-center items-center m-24">
-              <h2 className="mb-8 font-bold text-3xl text-center">
-                Create Page
+              <h2 className="mb-8 font-bold text-3xl text-center uppercase text-violet-500">
+              Edit
               </h2>
               <input
-                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
+                className="border border-slate-300  w-full h-12 text-violet-500 uppercase font-medium p-3 rounded mb-4"
                 type="text"
                 placeholder="Name"
                 onChange={(e) =>
@@ -51,46 +51,47 @@ const ProductEdit = () => {
                 value={product.title}
               />
               <input
-                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
+                className="border border-slate-300  w-full h-12 text-violet-500 uppercase font-medium p-3 rounded mb-4"
                 type="text"
-                placeholder="Name"
+                placeholder="location"
                 onChange={(e) =>
                   setProduct({ ...product, location: e.target.value })
                 }
                 value={product.location}
               />
               <input
-                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
+                className="border border-slate-300  w-full h-12 text-violet-500 uppercase font-medium p-3 rounded mb-4"
                 type="text"
-                placeholder="Name"
+                placeholder="price"
                 onChange={(e) =>
                   setProduct({ ...product, price: e.target.value })
                 }
                 value={product.price}
               />
               <input
-                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
+                className="border border-slate-300  w-full h-12 text-violet-500 uppercase font-medium p-3 rounded mb-4"
                 type="text"
-                placeholder="Name"
+                placeholder="education"
                 onChange={(e) =>
                   setProduct({ ...product, education: e.target.value })
                 }
                 value={product.education}
               />
               <input
-                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
+                className="border border-slate-300  w-full h-12 text-violet-500 uppercase font-medium p-3 rounded mb-4"
                 type="text"
-                placeholder="Name"
+                placeholder="description"
                 onChange={(e) =>
                   setProduct({ ...product, description: e.target.value })
                 }
                 value={product.description}
               />
-              <input type="text" onChange={(e) => setProduct({...product, comment: e.target.value})} />
+              <input type="text" placeholder="comment" className=" w-full h-12 text-violet-500 uppercase font-medium mb-4" onChange={(e) => setProduct({...product, comment: e.target.value})} />
               <select
                 onChange={(e) =>
                   setProduct({ ...product, category: e.target.value })
                 }
+                className=" w-full h-12 text-violet-500 uppercase font-medium"
               >
                 <option>Choose category</option>
                 {category.map((category) => (
@@ -100,7 +101,7 @@ const ProductEdit = () => {
                 ))}
               </select>
               <input
-                className="border border-slate-300 w-full h-12 p-3 rounded mb-4"
+                className="border border-slate-300  w-full h-12 text-violet-500 uppercase font-medium p-3 rounded mb-4"
                 type="file"
                 onChange={(e) => {
                   const selectedFile = e.target.files[0];
@@ -113,6 +114,7 @@ const ProductEdit = () => {
                   dispatch(createImage({ product }));
                   navigate("/products");
                 }}
+                className="bg-violet-400 text-white w-36 h-9 rounded uppercase"
               >
                 save
               </button>

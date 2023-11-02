@@ -9,6 +9,7 @@ import {
 } from "../../store/cart/cartSlice";
 import "./Cart.css";
 import { Navigate, useNavigate } from "react-router";
+import Navbar from "../ui/Navbar";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,9 @@ const Cart = () => {
   }
 
   return (
+    
     <div className="cart-container">
+
       <h2 className="cart-title">Your Cart</h2>
       <table className="cart-table">
         <thead>
