@@ -78,6 +78,7 @@ const ProductDetails = () => {
                   className="product-image"
                   src={oneProduct.images[0].image}
                   alt=""
+                  onClick={() => navigate("/quiz")}
                 />
               )}
               <div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -106,7 +107,10 @@ const ProductDetails = () => {
                 >
                   Edit
                 </button>
-                <button className="delete-button" onClick={handleDelete}>
+                <button
+                  className="delete-button bg-violet-400"
+                  onClick={handleDelete}
+                >
                   Delete
                 </button>
                 <button className="cart-button" onClick={handleCartAction}>

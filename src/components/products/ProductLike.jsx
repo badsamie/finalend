@@ -24,7 +24,7 @@ const ProductLike = () => {
         onClick={handleLikeClick}
         color={like > 0 ? "error" : "large"}
         style={{
-          backgroundColor: "purple",
+          backgroundColor: "#9589de",
           color: "white",
           padding: "10px",
           border: "none",
