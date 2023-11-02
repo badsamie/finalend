@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../store/products/productsActions";
 import { setSearchVal } from "../../store/products/productsSlice";
+
 const ProductsSearch = () => {
   const { search } = useSelector((state) => state.products);
   const [searchValue, setSearhValue] = useState(search);
@@ -49,13 +50,7 @@ const ProductsSearch = () => {
           dispatch(setSearchVal({ search: searchValue }));
           dispatch(getProducts());
         }}
-        style={{
-          backgroundColor: "black",
-          color: "white",
-          width: "25px",
-          height: "33px",
-          borderRadius: "0 7px 7px 0",
-        }}
+       className="bg-violet-500 text-white rounded w-12 h-9"
       >
         go
       </button>
